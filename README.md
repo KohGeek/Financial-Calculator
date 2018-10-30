@@ -5,13 +5,14 @@ This project is a collab work between 6 group members, as requested by the [Assi
 ## Todo
 - [x] Establish a scope
 - [x] Decide and establish the software for documentation work
-- [ ] Code + Publish
+- [ ] Document all major changes
+- [ ] Code, polish and finalise
 
 ## Scope
 - [ ] Loan Repayment
- - [ ] Mortage
- - [ ] Car
- - [ ] PTPTN
+    - [ ] Mortage
+    - [ ] Car
+    - [ ] PTPTN
 - [ ] **Income Tax Calculator**
 - [ ] Insurance Premium Calculator
 - [ ] **Bank Account Interest/Fixed Deposit Calculator**
