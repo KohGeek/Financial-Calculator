@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <version.h>
 
 int mortageloan();
+int interest();
 
 int main()
 {
