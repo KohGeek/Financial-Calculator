@@ -10,11 +10,12 @@ This project is a collab work between 6 group members, as requested by the [Assi
 
 ## Scope
 - [ ] Loan Repayment
-    - [ ] Mortage
+    - [x] Mortage
     - [ ] Car
     - [ ] PTPTN
 - [ ] **Income Tax Calculator**
 - [ ] Insurance Premium Calculator
+- [ ] KWSP Retirement Calculator
 - [ ] **Bank Account Interest/Fixed Deposit Calculator**
 - [ ] *Investment Calculator*
 

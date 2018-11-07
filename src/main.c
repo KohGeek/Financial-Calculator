@@ -41,12 +41,12 @@ int main(void)
 
 void main_menu(void)
 {
-    printf(" 1  Housing Loan\n");
-    printf(" 2  Car Loan\n");
-    printf(" 3  Retirement Planning (KWSP)\n");
-    printf(" 4  (To be volunteered)\n");
-    printf(" 9  Help & About\n");
-    printf(" 0  Exit\n\n\n");
+    printf("\t\t\t 1  Housing Loan\n");
+    printf("\t\t\t 2  Car Loan\n");
+    printf("\t\t\t 3  Retirement Planning (KWSP)\n");
+    printf("\t\t\t 4  (To be volunteered)\n");
+    printf("\t\t\t 9  Help & About\n");
+    printf("\t\t\t 0  Exit\n\n\n");
 }
 
 void housing_loan(void)
