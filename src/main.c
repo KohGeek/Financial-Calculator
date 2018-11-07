@@ -65,6 +65,7 @@ void housing_loan(void)
     scanf("%f", &interest);
 
     //Need help in data truncation for higher accuracy calculation
+    //Koh: Should be fixed, error in algorithms
     loan_percnt *= 0.01;
     interest *= 0.01;
     loan_amt = loan_percnt * cost;
