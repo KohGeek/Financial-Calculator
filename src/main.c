@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <version.h>
+#include "version.h"
 
 void main_menu(void);
 void housing_loan(void);
