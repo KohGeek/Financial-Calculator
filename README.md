@@ -13,14 +13,17 @@ This project is a collab work between 6 group members, as requested by the [Assi
     - [x] Mortage
     - [ ] Car
     - [ ] PTPTN
-- [ ] **Income Tax Calculator**
-- [ ] Insurance Premium Calculator
-- [ ] KWSP Retirement Calculator
-- [ ] **Bank Account Interest/Fixed Deposit Calculator**
-- [ ] *Investment Calculator*
+- [ ] **Income Tax**
+- [ ] **Bank Account Interest/Fixed Deposit**
 
 *Italics* signify low priority.
 **Bolds** signify top priority.
+
+### Topic of Interests
+- Return of Investment
+- Inflation
+- KWSP Retirement
+- Insurance Premium
 
 ## Documentation
 Microsoft Word is to be used. 
