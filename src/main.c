@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "version.h"
 
 void main_menu(void);
@@ -52,8 +53,8 @@ void main_menu(void)
 void housing_loan(void)
 {
     int tenure;
-    double cost, loan_amt, balance;
-    float downpay, loan_percnt, interest, installment;
+    double cost, loan_amt, balance, pow_func;
+    float downpay, loan_percnt, interest, installment, monthly_interest;
     printf("\t\t\t\t\t***Housing Loan Calculator***\n\n\n");
     printf("\t\tCost of House (RM): ");
     scanf("%lf", &cost);
@@ -65,12 +66,13 @@ void housing_loan(void)
     scanf("%f", &interest);
 
     //Need help in data truncation for higher accuracy calculation
-    //Koh: Should be fixed, error in algorithms
     loan_percnt *= 0.01;
-    interest *= 0.01;
+    tenure *= 12;
     loan_amt = loan_percnt * cost;
+    monthly_interest = ((interest)/100)/12;
     //installment = loan_amt * interest * tenure / (12 * tenure);
-    installment = loan_amt * (1 + interest) / (tenure * 12);
+    pow_func = pow((1 + monthly_interest),tenure);
+    installment = loan_amt * (monthly_interest / (1 - (1/pow_func)));
 
     printf("\n\t\t**Monthly repayment** : RM %.2f\n\n", installment);
 }
