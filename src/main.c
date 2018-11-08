@@ -53,8 +53,8 @@ void main_menu(void)
 void housing_loan(void)
 {
     int tenure;
-    double cost, loan_amt, balance, pow_func;
-    float downpay, loan_percnt, interest, installment, monthly_interest;
+    double cost, loan_amt, pow_func;
+    float loan_percnt, interest, installment, monthly_interest;
     printf("\t\t\t\t\t***Housing Loan Calculator***\n\n\n");
     printf("\t\tCost of House (RM): ");
     scanf("%lf", &cost);
