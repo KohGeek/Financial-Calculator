@@ -33,3 +33,11 @@ Microsoft Word is to be used.
 
 ## Prerequisites
 - Code:Blocks
+- GNU GCC Compiler
+
+## Personal Todo
+### Koh Jun Dong
+- [ ] Develop the date function
+- [ ] Develop a universal datatype checker
+- [ ] Income tax calculator
+- [ ] Figuring out the deductions and bitwise operator
