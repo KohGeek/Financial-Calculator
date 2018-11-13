@@ -3,8 +3,9 @@
 #include <math.h>
 #include <windows.h>
 #include "version.h"
+#include <conio.h> //Is this allowed?
 
-char _cmonth[4] = '';
+//char _cmonth[4] = '';
 
 void main_menu(void);
 void housing_loan(void);
@@ -16,13 +17,14 @@ int main(void)
 {
     int opt;
 
+	system("cls");
     printf("\n\n\t\t\t\t\t***SIMPLE FINANCIAL CALCULATOR***\n\n");
 
     do
     {
         main_menu();
 
-        printf("Enter a option to continue: ");
+        printf("Enter an option to continue: ");
         scanf("%d", &opt);
 
         switch(opt)
@@ -67,19 +69,29 @@ int month_function(int _nmonth)
 
 void housing_loan(void) //Date system awaiting to be added
 {
-    int tenure;
+    int tenure, month, year;
     double cost, loan_amt, pow_func;
     float loan_percnt, interest, installment, monthly_intrst;
+	system("cls");
     printf("\n\n\t\t\t\t\t***Housing Loan Calculator***\n\n\n"); //Pls help for the semi-colon indentation...
-    printf("\t\tCost of House (RM)\t: ");
-    scanf("%lf", &cost);
-    printf("\n\t\tLoan Percentage (%%)\t: ");
-    scanf("%f", &loan_percnt);
-    printf("\n\t\tLoan Tenure (Years)\t: ");
-    scanf("%d", &tenure);
-    printf("\n\t\tInterest Rate (%% P.A)\t: ");
-    scanf("%f", &interest);
+	printf("\t\tCost of House (RM)         : ");
+	scanf("%lf", &cost);
+	printf("\n\t\tLoan Percentage (%%)        : ");
+	scanf("%f", &loan_percnt);
+	printf("\n\t\tLoan Tenure (Years)        : ");
+	scanf("%d", &tenure);
+	printf("\n\t\tInterest Rate (%% P.A)      : ");
+	scanf("%f", &interest);
+	printf("\n\t\tFirst loan payback (mm/yy) : ");
+	scanf("%d/%d", &year, &month);
+	if (month > 12)
+	{
+		printf("\nERROR: Invalid month input. Please try again!");
+		printf("\n\n\t\tFirst loan payback (yy/mm) : ");
+		scanf("%d/%d", &year, &month);
+	}
 
+	//Validation needed for division by zero
     loan_percnt *= 0.01;
     tenure *= 12;
     loan_amt = loan_percnt * cost;
@@ -91,14 +103,15 @@ void housing_loan(void) //Date system awaiting to be added
     printf("\n\t\t**Monthly repayment**\t: RM %.2f\n\n", installment); //Need help for ":" indentation
     printf("\nProceed to full repayment schedue? (1 - Yes ; 0 - No [back to main menu] ) : ");
     scanf("%d", &cont_exit);
-    printf("\n\nLoading...\n\n");
-    Sleep(1200);
 
     int no = 0;
     double balance = loan_amt, intrst_sum = 0;
     float intrst_accrued, princpl;
     if (cont_exit == 1)
     {
+		printf("\n\nLoading...\n\n");
+		Sleep(1200);
+		system("cls");
         printf("\n\nMonthly Installment Schedule\n----------------------------\n");
         printf("\n\n   \t \t\tPayable  \tInterest      \t Interest \tPrincipal      \tBalance\n");
         printf("No.\t Date\t\tDue (RM) \tAccrued (RM)  \t Sum (RM) \t(RM)           \tDue (RM)\n");
@@ -110,16 +123,30 @@ void housing_loan(void) //Date system awaiting to be added
             princpl = installment - intrst_accrued;
             intrst_sum += intrst_accrued;
             balance -= princpl;
-            if (balance <= 0)
+			if (month > 12)
+			{
+				year++;
+				month = 1;
+			}
+            else if (balance <= 0)
                 balance = 0;
-            printf("%3d\t    \t\t%.2f\t\t%7.2f\t\t%9.2lf\t%7.2f\t\t%9.2lf\n", no, installment, intrst_accrued, intrst_sum, princpl, balance);
+			printf("%3d\t%.2d/%d\t\t%.2f\t\t%7.2f\t\t%9.2lf\t%7.2f\t\t%9.2lf\n", no, month, year, installment, intrst_accrued, intrst_sum, princpl, balance);
+			month++;
         }
-        printf("\n\nEnter '0' to exit to main menu OR '1' to calculate another housing loan. : ");
+		printf("\n\nChoose any one option to continue? (0 - Exit to main menu; 1 - Calculate another housing loan;\n 2 - Exit the program) : ");
         scanf("%d", &cont_exit);
-        if (cont_exit == 1)
-            housing_loan();
-        else if (cont_exit == 0)
-            main();
+		if (cont_exit == 0)
+		{
+			system("cls");
+			main();
+		}
+		else if (cont_exit == 1)
+		{
+			system("cls");
+			housing_loan();
+		}
+		else if (cont_exit == 2)
+			exit(0);
         else
         {
             printf("Error!!!\n\n"); //Anyone is welcome to change the error message.
