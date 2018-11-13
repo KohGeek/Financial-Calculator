@@ -10,6 +10,7 @@ void main_menu(void);
 void housing_loan(void);
 void income_tax(void);
 int month_function(void);
+int bank_interest(void);
 
 int main(void)
 {
@@ -134,7 +135,7 @@ void housing_loan(void) //Date system awaiting to be added
     }
 }
 
-int main(void)
+int bank_interest(void)
 {
     int years ;
     float initial_amount , monthly_deposit , annual_interest , final_amount , rate ;
@@ -179,10 +180,6 @@ int main(void)
             break ;
 
     }
-
-
-
-
 
     return 0 ;
 }
