@@ -133,3 +133,56 @@ void housing_loan(void) //Date system awaiting to be added
         exit(0);
     }
 }
+
+int main(void)
+{
+    int years ;
+    float initial_amount , monthly_deposit , annual_interest , final_amount , rate ;
+    char type ;
+
+    printf("\nChoose type of interest   A : Annually\n                          M : Monthly\n                          Q : Quarterly\n                          S : Semiannually\n-> ") ;
+    scanf("%c" , &type) ;
+    printf("Key in initial amount           -> RM ") ;
+    scanf("%f" , &initial_amount) ;
+    printf("\nKey in monthly deposit        -> RM ") ;
+    scanf("%f" , &monthly_deposit) ;
+    printf("\nKey in rate in %%-> RM ") ;
+    scanf("%f" , &rate) ;
+    printf("\nKey in years -> ") ;
+    scanf("%d" , &years) ;
+
+    switch(type)
+    // [P(1+r/n)^(nt)] + [PMT x (((1+r/n)^(nt)-1)/(r/n))]
+    {
+        case 'A' :
+        case 'a' :
+            final_amount = (initial_amount * (pow((1 + rate / 100 / 1),(1 * years)))) + (monthly_deposit * (((pow((1 + rate / 100 / 1),(1 * years))) - 1) / (rate / 100 / 1))) ;
+            printf("Final savings balance -> RM %.2f" , final_amount) ;
+            break ;
+        case 'M' :
+        case 'm' :
+            final_amount = (initial_amount * (pow((1 + rate / 100 / 12),(12 * years)))) + (monthly_deposit * (((pow((1 + rate / 100 / 12),(12 * years))) - 1) / (rate / 100 / 12))) ;
+            printf("Final savings balance -> RM %.2f" , final_amount) ;
+            break ;
+        case 'Q' :
+        case 'q' :
+            final_amount = (initial_amount * (pow((1 + rate / 100 / 4.0),(4.0* years)))) + (monthly_deposit * (((pow((1 + rate / 100 / 4.0),(4.0 * years))) - 1) / (rate / 100 / 4.0))) ;
+            printf("Final savings balance -> RM %.2f" , final_amount) ;
+            break ;
+        case 'S' :
+        case 's' :
+            final_amount = (initial_amount * (pow((1 + rate / 100 / 4.0),(4.0* years)))) + (monthly_deposit * (((pow((1 + rate / 100 / 4.0),(4.0 * years))) - 1) / (rate / 100 / 4.0))) ;
+            printf("Final savings balance -> RM %.2f" , final_amount) ;
+            break ;
+        default :
+            printf("Please enter correct code for type of interest.") ;
+            break ;
+
+    }
+
+
+
+
+
+    return 0 ;
+}
