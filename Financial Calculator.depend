@@ -1,10 +1,20 @@
 # depslib dependency file v1.0
-1542093831 source:c:\users\kohco\documents\github\financial-calculator\src\main.c
+1542305684 source:c:\users\kohco\documents\github\financial-calculator\src\main.c
 	<stdio.h>
-	<stdlib.h>
 	<math.h>
 	<windows.h>
+	<conio.h>
 	"version.h"
+	"core.h"
 
-1542093831 c:\users\kohco\documents\github\financial-calculator\src\version.h
+1542305686 c:\users\kohco\documents\github\financial-calculator\src\version.h
+
+1542304793 c:\users\kohco\documents\github\financial-calculator\src\core.h
+
+1542305440 source:c:\users\kohco\documents\github\financial-calculator\src\core.c
+	<stdio.h>
+	<stdlib.h>
+	<errno.h>
+	<math.h>
+	"core.h"
 
