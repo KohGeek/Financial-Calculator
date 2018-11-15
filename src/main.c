@@ -2,15 +2,22 @@
 #include <stdlib.h>
 #include <math.h>
 #include <windows.h>
+#include <errno.h>
 #include "version.h"
 
-char _cmonth[4] = '';
+char _cmonth[4];
+char _string[120];
+int _gint;
+float _gfloat;
+double _gdouble;
+
 
 void main_menu(void);
 void housing_loan(void);
 void income_tax(void);
-int month_function(void);
+int month_function(int nmonth);
 int bank_interest(void);
+void dchecker(float max, float min, int type);
 
 int main(void)
 {
@@ -28,7 +35,6 @@ int main(void)
         switch(opt)
         {
         case 0:
-            exit(0);
             break;
         case 1:
             housing_loan();
@@ -38,6 +44,9 @@ int main(void)
             break;
         case 3:
             //KWSP();
+            break;
+        case 4:
+            bank_interest();
             break;
         }
     }
@@ -51,18 +60,120 @@ void main_menu(void)
     printf("\t\t\t 1  Housing Loan\n");
     printf("\t\t\t 2  Car Loan\n");
     printf("\t\t\t 3  Retirement Planning (KWSP)\n");
-    printf("\t\t\t 4  (To be volunteered)\n");
+    printf("\t\t\t 4  Bank Interest Calculator\n");
     printf("\t\t\t 9  Help & About\n");
     printf("\t\t\t 0  Exit\n\n\n");
 }
 
-void income_tax(void){
+void income_tax(void)
+{
 
 }
 
-int month_function(int _nmonth)
+int dchecker(double max, double min, int type, bool allowzero)
 {
-    return 0;
+    char *input[40];
+    int error = 1;
+    while(error == 1){
+        printf("%s",_string);
+        scanf("%s",&input);
+        if(type == 1){ //type 1 = integer
+            long value;
+            strtol(input, &value,10);
+            if(errno == ERANGE || value < min || value > max){
+                printf("Value keyed in is out of range, please try again.\n");
+            }else if(value == 0 && allowzero == FALSE){
+                printf("Value detected is 0, possible input error. Please try again.\n");
+            }else if(value == 0){
+                printf("Value detected is 0, but 0 is allowed. Possible input error?\n")
+                error = 0;
+                _gint = value;
+            }else{
+                error = 0;
+                _gint = value;
+            }
+        }else if(type == 2){ //type 2 = float
+            float value;
+            strtof(input, &value);
+            if(errno == ERANGE || value < min || value > max){
+                printf("Value keyed in is out of range, please try again.\n");
+            }else if(value == 0 && allowzero == FALSE){
+                printf("Value detected is 0, possible input error. Please try again.\n");
+            }else if(value == nan || value == inf){
+                printf("Value is invalid, please try again.\n");
+            }else if(value == 0){
+                printf("Value detected is 0, but 0 is allowed. Possible input error?");
+                error = 0;
+                _gfloat = value;
+            }else{
+                error = 0;
+                _gfloat = value;
+            }
+        }else if(type == 3){ //type 3 = double
+            double value;
+            strtod(input, &value);
+            if(errno == ERANGE || value < min || value > max){
+                printf("Value keyed in is out of range, please try again.\n");
+            }else if(value == 0 && allowzero == FALSE){
+                printf("Value detected is 0, possible input error. Please try again.\n");
+            }else if(value == nan || value == inf){
+                printf("Value is invalid, please try again.\n");
+            }else if(value == 0){
+                printf("Value detected is 0, but 0 is allowed. Possible input error?");
+                error = 0;
+                _gdouble = value;
+            }else{
+                error = 0;
+                _gdouble = value;
+            }
+        }else{
+            printf("Someone screwed up, check the code.\n");
+            return 2;
+        }
+    }
+    return 1;
+}
+
+void month_function(int nmonth)
+{
+    case(nmonth){
+        case 1:
+            _cmonth = "Jan";
+            break;
+        case 2:
+            _cmonth = "Feb";
+            break;
+        case 3:
+            _cmonth = "Mac";
+            break;
+        case 4:
+            _cmonth = "Apr";
+            break;
+        case 5:
+            _cmonth = "May";
+            break;
+        case 6:
+            _cmonth = "Jun";
+            break;
+        case 7:
+            _cmonth = "July";
+            break;
+        case 8:
+            _cmonth = "Aug";
+            break;
+        case 9:
+            _cmonth = "Sep";
+            break;
+        case 10:
+            _cmonth = "Oct";
+            break;
+        case 11:
+            _cmonth = "Nov";
+            break;
+        case 12:
+            _cmonth = "Dec";
+            break;
+    }
 }
 
 void housing_loan(void) //Date system awaiting to be added
@@ -70,7 +181,7 @@ void housing_loan(void) //Date system awaiting to be added
     int tenure;
     double cost, loan_amt, pow_func;
     float loan_percnt, interest, installment, monthly_intrst;
-    printf("\n\n\t\t\t\t\t***Housing Loan Calculator***\n\n\n"); //Pls help for the semi-colon indentation...
+    printf("\n\n\t\t\t\t\t***Housing Loan Calculator***\n\n\n");
     printf("\t\tCost of House (RM)\t: ");
     scanf("%lf", &cost);
     printf("\n\t\tLoan Percentage (%%)\t: ");
@@ -137,49 +248,62 @@ void housing_loan(void) //Date system awaiting to be added
 
 int bank_interest(void)
 {
-    int years ;
-    float initial_amount , monthly_deposit , annual_interest , final_amount , rate ;
-    char type ;
+    int years, type, cont_exit, freq;
+    float initial_amount, monthly_deposit, annual_interest, final_amount, rate;
 
-    printf("\nChoose type of interest   A : Annually\n                          M : Monthly\n                          Q : Quarterly\n                          S : Semiannually\n-> ") ;
-    scanf("%c" , &type) ;
-    printf("Key in initial amount           -> RM ") ;
-    scanf("%f" , &initial_amount) ;
-    printf("\nKey in monthly deposit        -> RM ") ;
-    scanf("%f" , &monthly_deposit) ;
-    printf("\nKey in rate in %%-> RM ") ;
-    scanf("%f" , &rate) ;
-    printf("\nKey in years -> ") ;
-    scanf("%d" , &years) ;
+    printf("\n\n\t\t\t\t***Bank Interest Calculator***\n\n\n");
+    printf("\n\t\tKey in initial amount\t\t\t-> RM ");
+    scanf("%f", &initial_amount);
+    printf("\n\t\tKey in monthly deposit\t\t\t\t-> RM ");
+    scanf("%f", &monthly_deposit);
+    printf("\n\t\tKey in rate in percentage\t\t\t-> ");
+    scanf("%f", &rate);
+    printf("\n\t\tKey in the length of deposit (years)\t\t-> ");
+    scanf("%d", &years);
+    printf("\n\t\tKey in the frequency of compounding in a year\t-> ")
+    scanf("%d",&freq)
+
+    final_amount = (initial_amount * (pow((1 + rate / 100 / freq),(freq * years)))) + (monthly_deposit * (((pow((1 + rate / 100 / freq),(freq * years))) - 1) / (rate / 100 / freq)));
+    printf("\n\t\tFinal savings balance -> RM %.2f\n\n", final_amount);
+
+    /**printf("\n\t\t\tType of interest:\n\n\t\t\t   1 - Annually\n\t\t\t   2 - Monthly\n\t\t\t   3 - Quarterly\n\t\t\t   4 - Semi-annually\n\nPlease key in your selection -> ");
+    scanf("%d", &type);
 
     switch(type)
     // [P(1+r/n)^(nt)] + [PMT x (((1+r/n)^(nt)-1)/(r/n))]
     {
-        case 'A' :
-        case 'a' :
-            final_amount = (initial_amount * (pow((1 + rate / 100 / 1),(1 * years)))) + (monthly_deposit * (((pow((1 + rate / 100 / 1),(1 * years))) - 1) / (rate / 100 / 1))) ;
-            printf("Final savings balance -> RM %.2f" , final_amount) ;
-            break ;
-        case 'M' :
-        case 'm' :
-            final_amount = (initial_amount * (pow((1 + rate / 100 / 12),(12 * years)))) + (monthly_deposit * (((pow((1 + rate / 100 / 12),(12 * years))) - 1) / (rate / 100 / 12))) ;
-            printf("Final savings balance -> RM %.2f" , final_amount) ;
-            break ;
-        case 'Q' :
-        case 'q' :
-            final_amount = (initial_amount * (pow((1 + rate / 100 / 4.0),(4.0* years)))) + (monthly_deposit * (((pow((1 + rate / 100 / 4.0),(4.0 * years))) - 1) / (rate / 100 / 4.0))) ;
-            printf("Final savings balance -> RM %.2f" , final_amount) ;
-            break ;
-        case 'S' :
-        case 's' :
-            final_amount = (initial_amount * (pow((1 + rate / 100 / 4.0),(4.0* years)))) + (monthly_deposit * (((pow((1 + rate / 100 / 4.0),(4.0 * years))) - 1) / (rate / 100 / 4.0))) ;
-            printf("Final savings balance -> RM %.2f" , final_amount) ;
-            break ;
-        default :
-            printf("Please enter correct code for type of interest.") ;
-            break ;
+    case 1:
+        final_amount = (initial_amount * (pow((1 + rate / 100 / 1),(1 * years)))) + (monthly_deposit * (((pow((1 + rate / 100 / 1),(1 * years))) - 1) / (rate / 100 / 1)));
+        printf("\n\t\tFinal savings balance -> RM %.2f\n\n", final_amount);
+        break;
+    case 2:
+        final_amount = (initial_amount * (pow((1 + rate / 100 / 12),(12 * years)))) + (monthly_deposit * (((pow((1 + rate / 100 / 12),(12 * years))) - 1) / (rate / 100 / 12))) ;
+        printf("\n\t\tFinal savings balance -> RM %.2f\n\n", final_amount);
+        break;
+    case 3:
+        final_amount = (initial_amount * (pow((1 + rate / 100 / 4.0),(4.0* years)))) + (monthly_deposit * (((pow((1 + rate / 100 / 4.0),(4.0 * years))) - 1) / (rate / 100 / 4.0)));
+        printf("\n\t\tFinal savings balance -> RM %.2f\n\n", final_amount);
+        break;
+    case 4:
+        final_amount = (initial_amount * (pow((1 + rate / 100 / 2.0),(2.0* years)))) + (monthly_deposit * (((pow((1 + rate / 100 / 2.0),(2.0 * years))) - 1) / (rate / 100 / 4.0)));
+        printf("\n\t\tFinal savings balance -> RM %.2f\n\n", final_amount);
+        break;
+    default :
+        printf("\n\t\tPlease enter correct code for type of interest.");
+        break;
+    }**/
 
+    printf("\n\nEnter '0' to exit to main menu OR '1' to do another calculation. : ");
+    scanf("%d", &cont_exit);
+    if (cont_exit == 1)
+        bank_interest();
+    else if (cont_exit == 0)
+        main();
+    else
+    {
+        printf("Error!!!\n\n"); //Anyone is welcome to change the error message.
+        exit(0);
     }
 
-    return 0 ;
+    return 0;
 }
