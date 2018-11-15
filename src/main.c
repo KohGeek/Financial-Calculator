@@ -5,13 +5,16 @@
 #include "version.h"
 #include "core.h"
 
+//global declaration of strings for core.c functions
 char* _cmonth[4];
 char* _string[120];
 
+//global declaration of number for core.c functions
 int _gint;
 float _gfloat;
 double _gdouble;
 
+//forward declaration of functions
 void main_menu(void);
 void housing_loan(void);
 void income_tax(void);
@@ -69,7 +72,7 @@ void income_tax(void)
 
 }
 
-void housing_loan(void) //Date system awaiting to be added
+void housing_loan(void)
 {
     int tenure, month, year;
     double cost, loan_amt, pow_func;
@@ -97,6 +100,7 @@ void housing_loan(void) //Date system awaiting to be added
 	}
 
 	//Validation needed for division by zero
+	//Koh: Validation can be done on input stage, verify?
     loan_percnt *= 0.01;
     tenure *= 12;
     loan_amt = loan_percnt * cost;
@@ -105,7 +109,7 @@ void housing_loan(void) //Date system awaiting to be added
     installment = loan_amt * (monthly_intrst / (1 - (1 / pow_func)));
 
     int cont_exit;
-    printf("\n\t\t**Monthly repayment**\t: RM %.2f\n\n", installment); //Need help for ":" indentation
+    printf("\n\t\t**Monthly repayment**\t: RM %.2f\n\n", installment); //Need help for ":" indentation - Koh: \t should have worked?
     printf("\nProceed to full repayment schedue? (1 - Yes ; 0 - No [back to main menu] ) : ");
     scanf("%d", &cont_exit);
 
