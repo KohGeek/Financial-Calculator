@@ -90,14 +90,15 @@ void housing_loan(void)
     scanf("%d", &tenure);
     printf("\n\t\tInterest Rate (%% P.A)\t: ");
     scanf("%f", &interest);
-	printf("\n\t\tFirst loan payback (mm/yy)\t: "); //suggestion - break month and date into two scanf, might make validation easy
-	scanf("%d/%d", &year, &month);
-	if (month > 12)
+	do
 	{
-		printf("\nERROR: Invalid month input. Please try again!");
-		printf("\n\n\t\tFirst loan payback (yy/mm) : ");
+		printf("\n\t\tFirst installment (yy/mm) : "); //suggestion - break month and date into two scanf, might make validation easy
 		scanf("%d/%d", &year, &month);
-	}
+
+		if (month > 12 || month <= 0)
+			printf("\nERROR: Invalid month input. Please try again!\n");
+	} while (month > 12 || month <= 0);
+	
 
 	//Validation needed for division by zero
 	//Koh: Validation can be done on input stage, verify?
