@@ -1,6 +1,29 @@
 # Folders
 bin/
 obj/
+.vs/
+
+
+
+# Visual Studio files
+
+*.db
+
+*.suo
+
+*.opendb
+
+*.ipch
+
+*.sln
+
+*.vcxproj
+
+*.filters
+
+*.user
+
+
 
 # IDE specific files
 *.layout
