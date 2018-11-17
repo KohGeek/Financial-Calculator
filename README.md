@@ -11,19 +11,11 @@ This project is a collab work between 6 group members, as requested by the [Assi
 ## Scope
 - [ ] Loan Repayment
     - [x] Mortage
-    - [ ] Car
-    - [ ] PTPTN
-- [ ] **Income Tax**
-- [ ] **Bank Account Interest/Fixed Deposit**
-
-*Italics* signify low priority.
-**Bolds** signify top priority.
-
-### Topic of Interests
-- Return of Investment
-- Inflation
-- KWSP Retirement
-- Insurance Premium
+    - [x] Car
+- [ ] Income  Tax
+- [ ] Bank Account Interest/Fixed Deposit
+- [ ] KWSP Calculator
+- [ ] Return of Investment Calculator
 
 ## Documentation
 Microsoft Word is to be used. 
@@ -37,7 +29,7 @@ Microsoft Word is to be used.
 
 ## Personal Todo
 ### Koh Jun Dong
-- [ ] Develop the date function
-- [ ] Develop a universal datatype checker
+- [x] Develop the date function
+- [x] Develop a universal datatype checker
 - [ ] Income tax calculator
 - [ ] Figuring out the deductions and bitwise operator

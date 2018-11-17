@@ -19,6 +19,7 @@ void main_menu(void);
 void housing_loan(void);
 void income_tax(void);
 int bank_interest(void);
+int car_loan(void);
 
 int main(void)
 {
@@ -42,7 +43,7 @@ int main(void)
             housing_loan();
             break;
         case 2:
-            //car_loan();
+            car_loan();
             break;
         case 3:
             //KWSP();
@@ -231,4 +232,59 @@ int bank_interest(void)
     }
 
     return 0;
+}
+
+int car_loan(void)
+{	
+	int loan_period, count=0, year, month;
+	double price, downpay, interest, payment;
+	float rate;
+	printf("\n\n\t\t\t\t\t***Car Loan Calculator***\n\n\n");
+	printf("\t\tCar Price (RM)\t: ");
+	scanf("%lf", &price);
+	printf("\n\t\tDownpayment (RM)\t: ");
+	scanf("%lf", &downpay);
+	printf("\n\t\tLoan Period (Years)\t: ");
+	scanf("%d", &loan_period);
+	printf("\n\t\tInterest Rate (%% P.A)\t: ");
+	scanf("%f", &rate);
+	printf("\n\t\tFirst loan payback (mm/yy)\t: "); //suggestion - break month and date into two scanf, might make validation easy
+	scanf("%d/%d", &year, &month);
+	if (month > 12 || month <= 0)
+	{
+		printf("\nERROR: Invalid month input. Please try again!");
+		printf("\n\n\t\tFirst loan payback (yy/mm) : ");
+		scanf("%d/%d", &year, &month);
+	}
+
+
+	payment = (((price - downpay) * (rate / 100) * loan_period) + price) / (loan_period * 12);
+	printf("\n\t\t Monthly Repayment (RM)\t %.2lf ", payment);
+	printf("\n\nMonthly Installment Schedule\n----------------------------\n");
+	
+	double balance = (price + (price * (rate/100) * loan_period)), principal = price;
+	{
+		printf("\n\n   \t \t\tPayable  \tInterest     \t               \tBalance\n");
+		printf("No.\t Date\t\tDue (RM) \tAccrued (RM) \tPrincipal (RM) \tDue (RM)\n");
+		printf("------------------------------------------------------------------------------------\n");
+
+		while (count != loan_period * 12)
+		{
+			count++;
+			balance -= payment;
+			interest = (price * (rate / 100) * loan_period)/(loan_period * 12);
+			principal = payment - interest;
+			if (month > 12)
+			{
+				year++;
+				month = 1;
+			}
+			if (balance < 0)
+				balance = 0;
+			printf("%3d\t%d/%.2d\t\t%.2f\t\t%7.2f\t\t%9.2lf\t%.2f\n", count, year, month, payment, interest, principal, balance);
+			month++;
+		}
+	}
+	
+	return 0;
 }

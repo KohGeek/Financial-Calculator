@@ -4,6 +4,7 @@ obj/
 
 # IDE specific files
 *.layout
+*.depend
 
 # Prerequisites
 *.d
