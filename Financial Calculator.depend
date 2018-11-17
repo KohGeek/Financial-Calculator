@@ -18,3 +18,22 @@
 	<math.h>
 	"core.h"
 
+1542440292 source:c:\users\pc\documents\application documents\financial-calculator\src\core.c
+	<stdio.h>
+	<stdlib.h>
+	<errno.h>
+	<math.h>
+	"core.h"
+
+1542440292 c:\users\pc\documents\application documents\financial-calculator\src\core.h
+
+1542440292 source:c:\users\pc\documents\application documents\financial-calculator\src\main.c
+	<stdio.h>
+	<math.h>
+	<windows.h>
+	<conio.h>
+	"version.h"
+	"core.h"
+
+1542440292 c:\users\pc\documents\application documents\financial-calculator\src\version.h
+
