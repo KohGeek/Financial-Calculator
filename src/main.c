@@ -98,7 +98,7 @@ void housing_loan(void)
 		if (month > 12 || month <= 0)
 			printf("\nERROR: Invalid month input. Please try again!\n");
 	} while (month > 12 || month <= 0);
-	
+
 
 	//Validation needed for division by zero
 	//Koh: Validation can be done on input stage, verify?
@@ -230,6 +230,35 @@ int bank_interest(void)
         printf("Error!!!\n\n"); //Anyone is welcome to change the error message.
         exit(0);
     }
+    int ROI (void)
+{
+	//1- Decalaration
+	float amt_invested, amt_returned, investment_time, investment_length, investment_gain, percentage_return, profit, invested ;
+
+	//2- Input
+	printf("Amount Invested :RM");
+	scanf("%f" , &amt_invested);
+
+	printf("Amount Returned :RM");
+	scanf("%f" , &amt_returned);
+
+	printf("Investment Length (years):");
+	scanf("%f" , &investment_time);
+
+	//3- Calculation
+	investment_gain = amt_returned - amt_invested;
+	percentage_return = ((amt_returned - amt_invested)/amt_invested) * 100;
+	profit = (investment_gain / amt_returned) *100;
+	invested = (amt_invested/ amt_returned) *100;
+
+
+	//4- Output
+	printf("Investment Gain: RM%.2f \n", investment_gain);
+	printf("Return of Investment: %.2f%% \n", percentage_return);
+	printf("Percentage of Profit: %.2f%% \n", profit);
+	printf("Percentage of Invested: %.2f%% \n", invested);
+	printf("Investment Length :%.1f years \n", investment_time);
+}
 
     return 0;
 }
