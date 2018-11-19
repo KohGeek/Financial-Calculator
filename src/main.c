@@ -242,7 +242,7 @@ void bank_interest(void)
 
 void ROI (void)
 {
-    //1- Decalaration
+    //1- Declaration
     float amt_invested, amt_returned, investment_time, investment_gain, percentage_return, profit, invested ;
 
     //2- Input
