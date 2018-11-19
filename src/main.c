@@ -267,53 +267,82 @@ void ROI (void)
 
 void car_loan(void)
 {
-    int loan_period, count=0, year, month;
-    double price, downpay, interest, payment;
-    float rate;
-    printf("\n\n\t\t\t\t\t***Car Loan Calculator***\n\n\n");
-    printf("\t\tCar Price (RM)\t: ");
-    scanf("%lf", &price);
-    printf("\n\t\tDownpayment (RM)\t: ");
-    scanf("%lf", &downpay);
-    printf("\n\t\tLoan Period (Years)\t: ");
-    scanf("%d", &loan_period);
-    printf("\n\t\tInterest Rate (%% P.A)\t: ");
-    scanf("%f", &rate);
-    printf("\n\t\tFirst loan payback (mm/yy)\t: "); //suggestion - break month and date into two scanf, might make validation easy
-    scanf("%d/%d", &year, &month);
-    if (month > 12 || month <= 0)
-    {
-        printf("\nERROR: Invalid month input. Please try again!");
-        printf("\n\n\t\tFirst loan payback (yy/mm) : ");
-        scanf("%d/%d", &year, &month);
-    }
+	int loan_period, count = 0, year, month, choice;
+	double price, downpay, interest, intrst_sum = 0;
+	float rate, payment;
+	system("cls");
 
+	do
+	{
+		printf("\n\n\t\t\t\t\t***Car Loan Calculator***\n\n\n");
+		printf("\t\tCar Price (RM)\t\t\t: ");
+		scanf("%lf", &price);
+		printf("\n\t\tDownpayment (RM)\t\t: ");
+		scanf("%lf", &downpay);
+		printf("\n\t\tLoan Period (Years)\t\t: ");
+		scanf("%d", &loan_period);
+		printf("\n\t\tInterest Rate (%% P.A)\t\t: ");
+		scanf("%f", &rate);
+		do
+		{
+			{
+				printf("\n\t\tFirst loan payback (yy/mm)\t: ");
+				scanf("%d/%d", &year, &month);
+				rewind(stdin);
+				if (month > 12 || month <= 0)
+				{
+					printf("\nERROR: Invalid month input. Please try again!\n");
+				}
+			}
+		} while (month > 12 || month <= 0);
 
-    payment = (((price - downpay) * (rate / 100) * loan_period) + price) / (loan_period * 12);
-    printf("\n\t\t Monthly Repayment (RM)\t %.2lf ", payment);
-    printf("\n\nMonthly Installment Schedule\n----------------------------\n");
+		payment = (price - downpay) * (1 + (rate / 100) * loan_period) / (loan_period * 12);
+		printf("\n\t\tMonthly Repayment (RM)\t\t: %.2f ", payment);
+		printf("\n\n\nMonthly Installment Schedule\n----------------------------\n");
 
-    double balance = (price + (price * (rate/100) * loan_period)), principal = price;
-    {
-        printf("\n\n   \t \t\tPayable  \tInterest     \t               \tBalance\n");
-        printf("No.\t Date\t\tDue (RM) \tAccrued (RM) \tPrincipal (RM) \tDue (RM)\n");
-        printf("------------------------------------------------------------------------------------\n");
+		double balance = payment * (loan_period * 12), principal = price;
+		{
+			printf("\n\n   \t \t\tPayable  \tInterest     \tInterest \t               \t\ Balance\n");
+			printf("No.\t Date\t\tDue (RM) \tAccrued (RM) \tSum      \tPrincipal (RM) \t\ Due (RM)\n");
+			printf("--------------------------------------------------------------------------------------------------\n");
 
-        while (count != loan_period * 12)
-        {
-            count++;
-            balance -= payment;
-            interest = (price * (rate / 100) * loan_period)/(loan_period * 12);
-            principal = payment - interest;
-            if (month > 12)
-            {
-                year++;
-                month = 1;
-            }
-            if (balance < 0)
-                balance = 0;
-            printf("%3d\t%d/%.2d\t\t%.2f\t\t%7.2f\t\t%9.2lf\t%.2f\n", count, year, month, payment, interest, principal, balance);
-            month++;
-        }
-    }
+			while (count != loan_period * 12)
+			{
+				count++;
+				balance -= payment;
+				interest = ((price - downpay) * (rate / 100) * loan_period) / (loan_period * 12);
+				intrst_sum += interest;
+				principal = payment - interest;
+				if (month > 12)
+				{
+					year++;
+					month = 1;
+				}
+				if (balance < 0)
+					balance = 0;
+				printf("%3d\t%d/%.2d\t\t%.2f\t\t%7.2lf\t\t%9.2lf\t%9.2lf\t%9.2lf\n", count, year, month, payment, interest, intrst_sum, principal, balance);
+				month++;
+			}
+		}
+		printf("\n\nChoose any one option to continue? (0 - Calculate another car loan; 1 - Return to main menu;\n 2 - Exit the program) : ");
+		scanf("%d", &choice);
+
+		if (choice == 0)
+		{
+			system("cls");
+		}
+		else if (choice == 1)
+		{
+			system("cls");
+		}
+		else if (choice == 2)
+		{
+			exit(0);
+		}
+		else
+		{
+			printf("Error!!!\n\n"); //Anyone is welcome to change the error message.
+			exit(0);
+		}
+	} while (choice == 0);
 }
