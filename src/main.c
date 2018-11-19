@@ -70,7 +70,7 @@ void main_menu(void)
 
 void income_tax(void)
 {
-
+    printf("");
 }
 
 void housing_loan(void)
