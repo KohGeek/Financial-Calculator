@@ -79,43 +79,40 @@ void housing_loan(void)
 	system("cls");
 
     do{
+        printf("\n\n\t\t\t\t\t***Housing Loan Calculator***\n\n\n");
+        *_string = "\t\tCost of House (RM)\t: \0"; //test implementation of new function
+        dchecker(100000000, 1, 2, 0);
+        cost = _gfloat;
+        //printf("\t\tCost of House (RM)\t: ");
+        //scanf("%lf", &cost);
+        printf("\n\t\tLoan Percentage (%%)\t: ");
+        scanf("%f", &loan_percnt);
+        printf("\n\t\tLoan Tenure (Years)\t: ");
+        scanf("%d", &tenure);
+        printf("\n\t\tInterest Rate (%% P.A)\t: ");
+        scanf("%f", &interest);
         do{
-            printf("\n\n\t\t\t\t\t***Housing Loan Calculator***\n\n\n");
-            *_string = "\t\tCost of House (RM)\t: \0"; //test implementation of new function
-            dchecker(100000000, 1, 2, 0);
-            cost = _gfloat;
-            //printf("\t\tCost of House (RM)\t: ");
-            //scanf("%lf", &cost);
-            printf("\n\t\tLoan Percentage (%%)\t: ");
-            scanf("%f", &loan_percnt);
-            printf("\n\t\tLoan Tenure (Years)\t: ");
-            scanf("%d", &tenure);
-            printf("\n\t\tInterest Rate (%% P.A)\t: ");
-            scanf("%f", &interest);
-            do{
-                printf("\n\t\tFirst installment (yy/mm) : "); //suggestion - break month and date into two scanf, might make validation easy
-                scanf("%d/%d", &year, &month);
-                rewind(stdin); //Can rewind be used?
-                if (month > 12 || month <= 0)
-                    printf("\nERROR: Invalid month input. Please try again!\n");
-            }while (month > 12 || month <= 0);
+            printf("\n\t\tFirst installment (yy/mm) : "); //suggestion - break month and date into two scanf, might make validation easy
+            scanf("%d/%d", &year, &month);
+            rewind(stdin); //Can rewind be used?
+            if (month > 12 || month <= 0)
+                printf("\nERROR: Invalid month input. Please try again!\n");
+        }while (month > 12 || month <= 0);
 
 
-            //Validation needed for division by zero
-            //Koh: Validation can be done on input stage, verify?
-            loan_percnt *= 0.01;
-            tenure *= 12;
-            loan_amt = loan_percnt * cost;
-            monthly_intrst = ((interest) / 100) / 12;
-            pow_func = pow((1 + monthly_intrst), tenure);
-            installment = loan_amt * (monthly_intrst / (1 - (1 / pow_func)));
+        //Validation needed for division by zero
+        //Koh: Validation can be done on input stage, verify?
+        loan_percnt *= 0.01;
+        tenure *= 12;
+        loan_amt = loan_percnt * cost;
+        monthly_intrst = ((interest) / 100) / 12;
+        pow_func = pow((1 + monthly_intrst), tenure);
+        installment = loan_amt * (monthly_intrst / (1 - (1 / pow_func)));
 
 
-            printf("\n\t\t**Monthly repayment**\t: RM %.2f\n\n", installment); //Need help for ":" indentation - Koh: \t should have worked?
-            printf("\nProceed to full repayment schedue? (1 - Yes ; 0 - No [Recalculate house loan] ) : ");
-            scanf("%d", &cont_exit);
-
-        }while (cont_exit == 0);
+        printf("\n\t\t**Monthly repayment**\t: RM %.2f\n\n", installment); //Need help for ":" indentation - Koh: \t should have worked?
+        printf("\nProceed to full repayment schedue? (1 - Yes ; 0 - No [Recalculate house loan] ) : ");
+        scanf("%d", &cont_exit);
 
         system("cls");
 
