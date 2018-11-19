@@ -20,7 +20,7 @@ void housing_loan(void);
 void income_tax(void);
 void bank_interest(void);
 void ROI(void);
-int car_loan(void);
+void car_loan(void);
 
 int main()
 {
@@ -183,7 +183,7 @@ void housing_loan(void)
 void bank_interest(void)
 {
     int years, type, cont_exit, freq;
-    float initial_amount, monthly_deposit, annual_interest, final_amount, rate;
+    float initial_amount, monthly_deposit, final_amount, rate;
 
     printf("\n\n\t\t\t\t***Bank Interest Calculator***\n\n\n");
     printf("\n\t\tKey in initial amount\t\t\t-> RM ");
