@@ -28,18 +28,19 @@
  *
  * **/
 
-int dchecker(double max, double min, int type, int allowzero)
+int dchecker(long max, long min, int type, int allowzero)
 {
-    char* input[40];
+    char input[40];
     int error = 1;
     while(error == 1)
     {
-        printf("%s",*_string);
+        printf("%s(%ld - %ld)\t:",*_string, min, max);
         scanf("%s",input);
+        const char* tempstr = input;
         if(type == 1)  //type 1 = integer
         {
             long value;
-            value = strtol(input,NULL,10);
+            value = strtol(tempstr,NULL,10);
             if(value == 0 && allowzero == 0)
             {
                 printf("\nValue detected is 0, possible input error. Please try again.\n\n");
@@ -52,7 +53,7 @@ int dchecker(double max, double min, int type, int allowzero)
             }
             else if(errno == ERANGE || value < min || value > max)
             {
-                printf("\nValue keyed in is out of range, please try again.\n\n");
+                printf("\nValue keyed in is out of range, should be between %ld and %ld, please try again.\n\n", min, max);
             }
             else
             {
@@ -63,7 +64,7 @@ int dchecker(double max, double min, int type, int allowzero)
         else if(type == 2)   //type 2 = float
         {
             float value;
-            value = strtof(input,NULL);
+            value = strtof(tempstr,NULL);
             if(value == 0 && allowzero == 0)
             {
                 printf("\nValue detected is 0, possible input error. Please try again.\n\n");
@@ -80,7 +81,7 @@ int dchecker(double max, double min, int type, int allowzero)
             }
             else if(errno == ERANGE || value < min || value > max)
             {
-                printf("\nValue keyed in is out of range, please try again.\n\n");
+                printf("\nValue keyed in is out of range, should be between %ld and %ld, please try again.\n\n", min ,max);
             }
             else
             {
@@ -91,7 +92,7 @@ int dchecker(double max, double min, int type, int allowzero)
         else if(type == 3)   //type 3 = double
         {
             double value;
-            value = strtod(input, NULL);
+            value = strtod(tempstr, NULL);
             if(value == 0 && allowzero == 0)
             {
                 printf("\nValue detected is 0, possible input error. Please try again.\n\n");
@@ -108,7 +109,7 @@ int dchecker(double max, double min, int type, int allowzero)
             }
             else if(errno == ERANGE || value < min || value > max)
             {
-                printf("\nValue keyed in is out of range, please try again.\n\n");
+                printf("\nValue keyed in is out of range, should be between %ld and %ld, please try again.\n\n", min, max);
             }
             else
             {

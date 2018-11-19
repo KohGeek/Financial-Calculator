@@ -69,7 +69,7 @@ void main_menu(void)
 
 void income_tax(void)
 {
-    printf("");
+    printf("\n");
 }
 
 void housing_loan(void)
@@ -82,7 +82,7 @@ void housing_loan(void)
     do
     {
         printf("\n\n\t\t\t\t\t***Housing Loan Calculator***\n\n\n");
-        *_string = "\t\tCost of House (RM)\t: \0"; //test implementation of new function
+        *_string = "\t\tCost of House (RM) \0"; //test implementation of new function
         dchecker(100000000, 1, 2, 0);
         cost = _gfloat;
         //printf("\t\tCost of House (RM)\t: ");

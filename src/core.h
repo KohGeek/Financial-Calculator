@@ -9,6 +9,6 @@ extern float _gfloat;
 extern double _gdouble;
 
 void month_function(int nmonth);
-int dchecker(double max, double min, int type, int allowzero);
+int dchecker(long max, long min, int type, int allowzero);
 
 #endif // CORE_H_INCLUDED
