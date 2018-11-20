@@ -11,12 +11,12 @@ This project is a collab work between 6 group members, as requested by the [Assi
 
 ## Scope
 
-- [ ] Loan Repayment
+- [x] Loan Repayment
   - [x] Mortage
   - [x] Car
-- [ ] Bank Account Interest/Fixed Deposit
+- [x] Bank Account Interest/Fixed Deposit
 - [ ] KWSP Calculator
-- [ ] Return of Investment Calculator
+- [x] Return of Investment Calculator
 
 ## Documentation
 
