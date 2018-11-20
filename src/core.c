@@ -76,7 +76,7 @@ long ichecker(long max, long min, int allowzero, int psfix)
         }
         else if(value == 0)
         {
-            printf("\nValue detected is 0, but 0 is allowed. Possible input error?\n\n");
+            printf("\nValue detected is 0, but 0 is allowed. Possible input error?\n");
             error = 0;
         }
         else if(errno == ERANGE || value < min || value > max)
@@ -132,7 +132,7 @@ float fchecker(float max, float min, int allowzero, int psfix)
         }
         else if(value == 0)
         {
-            printf("\nValue detected is 0, but 0 is allowed. Possible input error?\n\n");
+            printf("\nValue detected is 0, but 0 is allowed. Possible input error?\n");
             error = 0;
         }
         else if(errno == ERANGE || value < min || value > max)
@@ -188,7 +188,7 @@ double dchecker(double max, double min, int allowzero, int psfix)
         }
         else if(value == 0)
         {
-            printf("\nValue detected is 0, but 0 is allowed. Possible input error?\n\n");
+            printf("\nValue detected is 0, but 0 is allowed. Possible input error?\n");
             error = 0;
         }
         else if(errno == ERANGE || value < min || value > max)
