@@ -124,6 +124,7 @@ void housing_loan(void)
             printf("\n\n   \t \t\tPayable  \tInterest      \t Interest \tPrincipal      \tBalance\n");
             printf("No.\t Date\t\tDue (RM) \tAccrued (RM)  \t Sum (RM) \t(RM)           \tDue (RM)\n");
             printf("-------------------------------------------------------------------------------------------------\n");
+
             while (no != tenure)
             {
                 no++;
@@ -306,28 +307,26 @@ void car_loan(void)
         printf("\n\n\nMonthly Installment Schedule\n----------------------------\n");
 
         double balance = payment * (loan_period * 12), principal = price;
-        {
-            printf("\n\n   \t \t\tPayable  \tInterest     \tInterest \t               \t Balance\n");
-            printf("No.\t Date\t\tDue (RM) \tAccrued (RM) \tSum      \tPrincipal (RM) \t Due (RM)\n");
-            printf("--------------------------------------------------------------------------------------------------\n");
+        printf("\n\n   \t \t\tPayable  \tInterest     \tInterest \t               \t Balance\n");
+        printf("No.\t Date\t\tDue (RM) \tAccrued (RM) \tSum      \tPrincipal (RM) \t Due (RM)\n");
+        printf("--------------------------------------------------------------------------------------------------\n");
 
-            while (count != loan_period * 12)
+        while (count != loan_period * 12)
+        {
+            count++;
+            balance -= payment;
+            interest = ((price - downpay) * (rate / 100) * loan_period) / (loan_period * 12);
+            intrst_sum += interest;
+            principal = payment - interest;
+            if (month > 12)
             {
-                count++;
-                balance -= payment;
-                interest = ((price - downpay) * (rate / 100) * loan_period) / (loan_period * 12);
-                intrst_sum += interest;
-                principal = payment - interest;
-                if (month > 12)
-                {
-                    year++;
-                    month = 1;
-                }
-                if (balance < 0)
-                    balance = 0;
-                printf("%3d\t%d/%.2d\t\t%.2f\t\t%7.2lf\t\t%9.2lf\t%9.2lf\t%9.2lf\n", count, year, month, payment, interest, intrst_sum, principal, balance);
-                month++;
+                year++;
+                month = 1;
             }
+            if (balance < 0)
+                balance = 0;
+            printf("%3d\t%d/%.2d\t\t%.2f\t\t%7.2lf\t\t%9.2lf\t%9.2lf\t%9.2lf\n", count, year, month, payment, interest, intrst_sum, principal, balance);
+            month++;
         }
         printf("\n\nChoose any one option to continue? (0 - Calculate another car loan; 1 - Return to main menu;\n 2 - Exit the program) : ");
         scanf("%d", &choice);
