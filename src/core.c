@@ -76,7 +76,7 @@ long ichecker(long max, long min, int allowzero, int psfix)
         flush();
         char tempstr[20];
         strncpy(tempstr,input,20);
-        for(int i = 0; i < 20; i++)
+        for(unsigned int i = 0; i < strlen(tempstr); i++)
         {
             if(isdigit(tempstr[i]) == 0)
             {
@@ -98,11 +98,10 @@ long ichecker(long max, long min, int allowzero, int psfix)
 
             if(value == 0 && allowzero == 0)
             {
-                printf("\nValue detected is 0, possible input error. Please try again.\n\n");
+                printf("\nValue detected is 0 and invalid. Please try again.\n\n");
             }
             else if(value == 0)
             {
-                printf("\nValue detected is 0, but 0 is allowed. Possible input error?\n");
                 error = 0;
             }
             else if(errno == ERANGE || value < min || value > max)
@@ -154,7 +153,7 @@ float fchecker(float max, float min, int allowzero, int psfix)
         flush();
         char tempstr[20];
         strncpy(tempstr,input,20);
-        for(int i = 0; i < 20; i++)
+        for(unsigned int i = 0; i < strlen(tempstr); i++)
         {
             if(isdigit(tempstr[i]) == 0)
             {
@@ -176,7 +175,7 @@ float fchecker(float max, float min, int allowzero, int psfix)
 
             if(value == 0 && allowzero == 0)
             {
-                printf("\nValue detected is 0, possible input error. Please try again.\n\n");
+                printf("\nValue detected is 0 and invalid. Please try again.\n\n");
             }
             else if(value == NAN || value == INFINITY)
             {
@@ -184,7 +183,6 @@ float fchecker(float max, float min, int allowzero, int psfix)
             }
             else if(value == 0)
             {
-                printf("\nValue detected is 0, but 0 is allowed. Possible input error?\n");
                 error = 0;
             }
             else if(errno == ERANGE || value < min || value > max)
@@ -236,7 +234,7 @@ double dchecker(double max, double min, int allowzero, int psfix)
         flush();
         char tempstr[20];
         strncpy(tempstr,input,20);
-        for(int i = 0; i < 20; i++)
+        for(unsigned int i = 0; i < strlen(tempstr); i++)
         {
             if(isdigit(tempstr[i]) == 0)
             {
@@ -258,7 +256,7 @@ double dchecker(double max, double min, int allowzero, int psfix)
 
             if(value == 0 && allowzero == 0)
             {
-                printf("\nValue detected is 0, possible input error. Please try again.\n\n");
+                printf("\nValue detected is 0 and invalid. Please try again.\n\n");
             }
             else if(value == NAN || value == INFINITY)
             {
@@ -266,7 +264,6 @@ double dchecker(double max, double min, int allowzero, int psfix)
             }
             else if(value == 0)
             {
-                printf("\nValue detected is 0, but 0 is allowed. Possible input error?\n");
                 error = 0;
             }
             else if(errno == ERANGE || value < min || value > max)
@@ -337,5 +334,7 @@ void month_function(int nmonth)
     case 12:
         *_cmonth = "Dec\0";
         break;
+    default:
+        return;
     }
 }

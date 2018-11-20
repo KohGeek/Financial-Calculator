@@ -20,7 +20,7 @@ void EPF(void);
 
 int main(void)
 {
-    int opt;
+    int opt = 7;
 
     do
     {
@@ -279,7 +279,7 @@ void bank_interest(void)
 {
     int years, cont_exit = 0;
     double initial_amount, final_amount, rate, freq;
-    char type;
+    char type = 'I';
     system("cls");
 
     do
