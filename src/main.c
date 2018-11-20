@@ -105,7 +105,6 @@ void housing_loan(void)
         pow_func = pow((1 + monthly_intrst), tenure);
         installment = loan_amt * (monthly_intrst / (1 - (1 / pow_func)));
 
-
         printf("\n\t\t**Monthly repayment**\t: RM %.2f\n\n", installment);
         printf("\nProceed to full repayment schedue? (1 - Yes ; 0 - No [Recalculate house loan] ) : ");
         scanf("%d", &cont_exit);

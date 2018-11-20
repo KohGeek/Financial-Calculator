@@ -13,6 +13,13 @@
  *      0 - no
  *      1 - yes
  *
+ * Special case: fchecker accepts another argument, percentage
+ * - percentage: whether percentage is used
+ *      0 - no
+ *      1 - yes
+ * 
+ * This allows for an alternative percentage prompt when value is out of range.
+ * 
  * (Due to the limitation of standard C library and
  * time constraint, junk values are often treated as 0,
  * thus care has been taken to specifically prompt the
@@ -61,7 +68,7 @@ long ichecker(long max, long min, int allowzero)
     return value;
 }
 
-float fchecker(long max, long min, int allowzero)
+float fchecker(float max, float min, int allowzero, int percentage)
 {
     char input[40];
     int error = 1;
@@ -69,7 +76,7 @@ float fchecker(long max, long min, int allowzero)
     while(error == 1)
     {
         errno = 0;
-        printf("%s(%ld - %ld)\t:",*_string, min, max);
+        printf("%s(%f - %f)\t:",*_string, min, max);
         char s;
 
         scanf("%40s",input);
@@ -92,7 +99,10 @@ float fchecker(long max, long min, int allowzero)
         }
         else if(errno == ERANGE || value < min || value > max)
         {
-            printf("\nValue keyed in is out of range, should be between %ld and %ld, please try again.\n\n", min,max);
+            if(percentage == 0)
+                printf("\nValue keyed in is out of range, should be between %f and %f, please try again.\n\n", min, max);
+            else
+                printf("\nValue keyed in is out of range, should be between %f%% and %f%%, please try again.\n\n", min, max);
         }
         else
         {
@@ -102,7 +112,7 @@ float fchecker(long max, long min, int allowzero)
     return value;
 }
 
-double dchecker(long max, long min, int allowzero)
+double dchecker(double max, double min, int allowzero)
 {
     char input[40];
     int error = 1;
@@ -110,7 +120,7 @@ double dchecker(long max, long min, int allowzero)
     while(error == 1)
     {
         errno = 0;
-        printf("%s %ld - %ld)\t:",*_string, min, max);
+        printf("%s %lf - %lf)\t:",*_string, min, max);
         char s;
 
         scanf("%40s",input);
@@ -133,7 +143,7 @@ double dchecker(long max, long min, int allowzero)
         }
         else if(errno == ERANGE || value < min || value > max)
         {
-            printf("\nValue keyed in is out of range, should be between %ld and %ld, please try again.\n\n", min, max);
+            printf("\nValue keyed in is out of range, should be between %lf and %lf, please try again.\n\n", min, max);
         }
         else
         {
@@ -194,51 +204,4 @@ void month_function(int nmonth)
         *_cmonth = "Dec\0";
         break;
     }
-}
-
-int prcntchecker(float max, float min, int type, int allowzero) //This is created specially for any field with percentage
-{
-	char input[40];
-	int error_flag = 1;
-	while (error_flag = 1)
-	{
-		printf("%s %f - %f %%)\t: ", *_string, min, max);
-		scanf("%f", input);
-		const char* tempstr = input;
-
-		if (type == 2)
-		{
-			float value;
-			value = strtof(tempstr, NULL);
-			if (value == 0 && allowzero == 0)
-			{
-				printf("\nValue detected is 0, possible input error. Please try again.\n\n");
-			}
-			else if (value == NAN || value == INFINITY)
-			{
-				printf("\nValue is invalid, please try again.\n\n");
-			}
-			else if (value == 0)
-			{
-				printf("\nValue detected is 0, but 0 is allowed. Possible input error?\n\n");
-				error_flag = 0;
-				_gfloat = value;
-			}
-			else if (errno == ERANGE || value < min || value > max)
-			{
-				printf("\nValue keyed in is out of range, should be between %f%% and %f%%, please try again.\n\n", min, max);
-			}
-			else
-			{
-				error_flag = 0;
-				_gfloat = value;
-			}
-		}
-		else
-		{
-			printf("Someone screwed up, check the code.\n\n");
-			return 2;
-		}
-	}
-	return 2;
 }
