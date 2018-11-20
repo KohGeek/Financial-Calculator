@@ -41,10 +41,10 @@ int main(void)
             car_loan();
             break;
         case 3:
-            ROI();
+            bank_interest();
             break;
         case 4:
-            bank_interest();
+            ROI();
             break;
         case 5:
             EPF();
@@ -67,8 +67,8 @@ void main_menu(void)
     printf("\n\n\t\t\t\t\t***SIMPLE FINANCIAL CALCULATOR***\n\n");
     printf("\t\t\t 1  Housing Loan Calculator\n");
     printf("\t\t\t 2  Car Loan Calculator\n");
-    printf("\t\t\t 3  Return of Investment (ROI) Calculator\n");
-    printf("\t\t\t 4  Bank Interest Calculator\n");
+    printf("\t\t\t 3  Bank Interest Calculator\n");
+    printf("\t\t\t 4  Return of Investment (ROI) Calculator\n");
     printf("\t\t\t 5  EPF Retirement Calculator\n\n");
     printf("\t\t\t 9  Help & About\n");
     printf("\t\t\t 0  Exit\n\n\n");
@@ -191,6 +191,88 @@ void housing_loan(void)
         }
     }
     while(cont_exit == 0);
+}
+
+void car_loan(void)
+{
+    int loan_period, count, year, month, cont_exit = 0;
+    double price, downpay, interest, intrst_sum = 0;
+    float rate, payment;
+    system("cls");
+
+    do
+    {
+        count = 0;
+        printf("\n\n\t\t\t\t\t***Car Loan Calculator***\n\n\n");
+
+        *_string = "\t\tCar Price\0";
+        *_units = "RM\0";
+        price = dchecker(100000000,10000,0,1);
+
+        *_string = "\t\tDown Payment\0";
+        downpay = dchecker(price - 1,0,1,1);
+
+        *_string = ("\t\tLoan Tenure\0");
+        *_units = "Years\0";
+        loan_period = ichecker(9,3,0,3);
+
+        *_string = "\t\tInterest Rate\0";
+        *_units = "% P.A.\0";
+        rate = fchecker(10,1,0,2);
+
+        *_string = "\t\tFirst installment\0";
+        *_units = "Year\0";
+        year = ichecker(2200,1918,0,1);
+
+        *_string = "\t\tFirst installment\0";
+        *_units = "Month\0";
+        month = ichecker(12,1,0,1);
+
+        payment = (price - downpay) * (1 + (rate / 100) * loan_period) / (loan_period * 12);
+        printf("\n\t\tMonthly Repayment (RM)\t\t: %.2f ", payment);
+        printf("\n\n\n\t\t\t\tMonthly Installment Schedule\n\t\t\t\t----------------------------\n");
+
+        double balance = payment * (loan_period * 12), principal = price;
+        printf("\n\n   \t \t\tPayable   \tInterest     \tInterest \t               \t Balance\n");
+        printf("No.\t Date\t\tDue (RM)  \tAccrued (RM) \tSum (RM) \tPrincipal (RM) \t Due (RM)\n");
+        printf("--------------------------------------------------------------------------------------------------\n");
+
+        while (count != loan_period * 12)
+        {
+            count++;
+            balance -= payment;
+            interest = ((price - downpay) * (rate / 100) * loan_period) / (loan_period * 12);
+            intrst_sum += interest;
+            principal = payment - interest;
+            if (month > 12)
+            {
+                year++;
+                month = 1;
+            }
+            if (balance < 0)
+                balance = 0;
+            month_function(month);
+            printf("%3d\t%s %d\t%7.2f   \t%7.2lf  \t%9.2lf\t%9.2lf\t%9.2lf\n", count, *_cmonth, year, payment, interest, intrst_sum, principal, balance);
+            month++;
+        }
+
+        do
+        {
+            printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
+            scanf("%d", &cont_exit);
+            flush();
+            if (cont_exit == 1)
+                system("cls");
+            else if (cont_exit == 0)
+                system("cls");
+            else if (cont_exit == 2)
+                exit(0);
+            else
+                printf("\nInvalid option, please try again.");
+        }
+        while(cont_exit != 0 && cont_exit != 1);
+    }
+    while (cont_exit == 0);
 }
 
 void bank_interest(void)
@@ -325,87 +407,6 @@ void ROI(void)
         while(cont_exit != 0 && cont_exit != 1);
     }
     while(cont_exit == 0);
-}
-
-void car_loan(void)
-{
-    int loan_period, count = 0, year, month, cont_exit = 0;
-    double price, downpay, interest, intrst_sum = 0;
-    float rate, payment;
-    system("cls");
-
-    do
-    {
-        printf("\n\n\t\t\t\t\t***Car Loan Calculator***\n\n\n");
-
-        *_string = "\t\tCar Price\0";
-        *_units = "RM\0";
-        price = dchecker(100000000,10000,0,1);
-
-        *_string = "\t\tDown Payment\0";
-        downpay = dchecker(price - 1,0,1,1);
-
-        *_string = ("\t\tLoan Tenure\0");
-        *_units = "Years\0";
-        loan_period = ichecker(9,3,0,3);
-
-        *_string = "\t\tInterest Rate\0";
-        *_units = "% P.A.\0";
-        rate = fchecker(10,1,0,2);
-
-        *_string = "\t\tFirst installment\0";
-        *_units = "Year\0";
-        year = ichecker(2200,1918,0,1);
-
-        *_string = "\t\tFirst installment\0";
-        *_units = "Month\0";
-        month = ichecker(12,1,0,1);
-
-        payment = (price - downpay) * (1 + (rate / 100) * loan_period) / (loan_period * 12);
-        printf("\n\t\tMonthly Repayment (RM)\t\t: %.2f ", payment);
-        printf("\n\n\n\t\t\t\tMonthly Installment Schedule\n\t\t\t\t----------------------------\n");
-
-        double balance = payment * (loan_period * 12), principal = price;
-        printf("\n\n   \t \t\tPayable   \tInterest     \tInterest \t               \t Balance\n");
-        printf("No.\t Date\t\tDue (RM)  \tAccrued (RM) \tSum (RM) \tPrincipal (RM) \t Due (RM)\n");
-        printf("--------------------------------------------------------------------------------------------------\n");
-
-        while (count != loan_period * 12)
-        {
-            count++;
-            balance -= payment;
-            interest = ((price - downpay) * (rate / 100) * loan_period) / (loan_period * 12);
-            intrst_sum += interest;
-            principal = payment - interest;
-            if (month > 12)
-            {
-                year++;
-                month = 1;
-            }
-            if (balance < 0)
-                balance = 0;
-            month_function(month);
-            printf("%3d\t%s %d\t%7.2f   \t%7.2lf  \t%9.2lf\t%9.2lf\t%9.2lf\n", count, *_cmonth, year, payment, interest, intrst_sum, principal, balance);
-            month++;
-        }
-
-        do
-        {
-            printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
-            scanf("%d", &cont_exit);
-            flush();
-            if (cont_exit == 1)
-                system("cls");
-            else if (cont_exit == 0)
-                system("cls");
-            else if (cont_exit == 2)
-                exit(0);
-            else
-                printf("\nInvalid option, please try again.");
-        }
-        while(cont_exit != 0 && cont_exit != 1);
-    }
-    while (cont_exit == 0);
 }
 
 void EPF(void)
