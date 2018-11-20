@@ -421,13 +421,13 @@ void EPF(void)
 
         *_string = "\t\tCurrent age\0";
         *_units = "years old\0";
-        c_age = ichecker(60,18,0,3);
+        c_age = ichecker(60,13,0,3);
 
         *_string = "\t\tRetirement age\0";
         r_age = ichecker(70,c_age,0,3);
 
         *_string = "\t\tLife expectancy";
-        life_expect = ichecker(110,r_age,0,3);
+        life_expect = ichecker(130,r_age,0,3);
 
         *_string = "\t\tExpected inflation rate\0";
         *_units = "%\0";

@@ -29,6 +29,12 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-Wunreachable-code" />
+			<Add option="-Wswitch-default" />
+			<Add option="-Weffc++" />
+			<Add option="-pedantic-errors" />
+			<Add option="-pedantic" />
+			<Add option="-Wextra" />
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="src/core.c">
