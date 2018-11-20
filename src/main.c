@@ -9,15 +9,9 @@
 char* _cmonth[4];
 char* _string[120];
 
-//global declaration of number for core.c functions
-int _gint;
-float _gfloat;
-double _gdouble;
-
 //forward declaration of functions
 void main_menu(void);
 void housing_loan(void);
-void income_tax(void);
 void bank_interest(void);
 void ROI(void);
 void car_loan(void);
@@ -44,11 +38,19 @@ int main()
             car_loan();
             break;
         case 3:
-            //KWSP();
+            ROI();
             break;
         case 4:
             bank_interest();
             break;
+        case 5:
+            //KWSP();
+            break;
+        case 9:
+            //help();
+            break;
+        default:
+            printf("Invalid input, please try again.");
         }
     }
     while (opt != 0);
@@ -61,15 +63,11 @@ void main_menu(void)
     printf("\n\n\t\t\t\t\t***SIMPLE FINANCIAL CALCULATOR***\n\n");
     printf("\t\t\t 1  Housing Loan\n");
     printf("\t\t\t 2  Car Loan\n");
-    printf("\t\t\t 3  Retirement Planning (KWSP)\n");
+    printf("\t\t\t 3  Return of Investment (ROI) Calculator\n");
     printf("\t\t\t 4  Bank Interest Calculator\n");
+    printf("\t\t\t 5  KWSP Retirement Calculator\n");
     printf("\t\t\t 9  Help & About\n");
     printf("\t\t\t 0  Exit\n\n\n");
-}
-
-void income_tax(void)
-{
-    printf("\n");
 }
 
 void housing_loan(void)
@@ -82,11 +80,8 @@ void housing_loan(void)
     do
     {
         printf("\n\n\t\t\t\t\t***Housing Loan Calculator***\n\n\n");
-        *_string = "\t\tCost of House (RM) \0"; //test implementation of new function
-        dchecker(100000000, 1, 2, 0);
-        cost = _gfloat;
-        //printf("\t\tCost of House (RM)\t: ");
-        //scanf("%lf", &cost);
+        *_string = "\t\tCost of House (RM) \0";
+        cost = dchecker(100000000, 1, 0);
         printf("\n\t\tLoan Percentage (%%)\t: ");
         scanf("%f", &loan_percnt);
         printf("\n\t\tLoan Tenure (Years)\t: ");
@@ -97,15 +92,12 @@ void housing_loan(void)
         {
             printf("\n\t\tFirst installment (yy/mm) : "); //suggestion - break month and date into two scanf, might make validation easy
             scanf("%d/%d", &year, &month);
-            rewind(stdin); //Can rewind be used?
+            rewind(stdin); //Can rewind be used? - Not recommended
             if (month > 12 || month <= 0)
                 printf("\nERROR: Invalid month input. Please try again!\n");
         }
         while (month > 12 || month <= 0);
 
-
-        //Validation needed for division by zero
-        //Koh: Validation can be done on input stage, verify?
         loan_percnt *= 0.01;
         tenure *= 12;
         loan_amt = loan_percnt * cost;
@@ -114,7 +106,7 @@ void housing_loan(void)
         installment = loan_amt * (monthly_intrst / (1 - (1 / pow_func)));
 
 
-        printf("\n\t\t**Monthly repayment**\t: RM %.2f\n\n", installment); //Need help for ":" indentation - Koh: \t should have worked?
+        printf("\n\t\t**Monthly repayment**\t: RM %.2f\n\n", installment);
         printf("\nProceed to full repayment schedue? (1 - Yes ; 0 - No [Recalculate house loan] ) : ");
         scanf("%d", &cont_exit);
 
@@ -167,7 +159,7 @@ void housing_loan(void)
             }
             else
             {
-                printf("Error!!!\n\n"); //Anyone is welcome to change the error message.
+                printf("Error!!!\n\n"); //Anyone is welcome to change the error message. Koh: Make a while loop here
                 exit(0);
             }
         }
@@ -177,49 +169,61 @@ void housing_loan(void)
 
 void bank_interest(void)
 {
-    int years, type, cont_exit, freq;
-    float initial_amount, monthly_deposit, final_amount, rate;
+    int years,cont_exit;
+    double initial_amount, final_amount, rate;
+    char type;
 
-    printf("\n\n\t\t\t\t***Bank Interest Calculator***\n\n\n");
-    printf("\n\t\tKey in initial amount\t\t\t-> RM ");
-    scanf("%f", &initial_amount);
-    printf("\n\t\tKey in monthly deposit\t\t\t\t-> RM ");
-    scanf("%f", &monthly_deposit);
-    printf("\n\t\tKey in rate in percentage\t\t\t-> ");
-    scanf("%f", &rate);
-    printf("\n\t\tKey in the length of deposit (years)\t\t-> ");
-    scanf("%d", &years);
-    printf("\n\t\tKey in the frequency of compounding in a year\t-> ");
-    scanf("%d",&freq);
-
-    final_amount = (initial_amount * (pow((1 + rate / 100 / freq),(freq * years)))) + (monthly_deposit * (((pow((1 + rate / 100 / freq),(freq * years))) - 1) / (rate / 100 / freq)));
-    printf("\n\t\tFinal savings balance -> RM %.2f\n\n", final_amount);
-
-    printf("\n\t\t\tType of interest:\n\n\t\t\t   1 - Annually\n\t\t\t   2 - Monthly\n\t\t\t   3 - Quarterly\n\t\t\t   4 - Semi-annually\n\nPlease key in your selection -> ");
-    scanf("%d", &type);
-
-    switch(type)
-        // [P(1+r/n)^(nt)] + [PMT x (((1+r/n)^(nt)-1)/(r/n))]
+    printf("Initial amount : RM ");
+    scanf("%lf", &initial_amount);
+    if(initial_amount > 0)
     {
-    case 1:
-        final_amount = (initial_amount * (pow((1 + rate / 100 / 1),(1 * years)))) + (monthly_deposit * (((pow((1 + rate / 100 / 1),(1 * years))) - 1) / (rate / 100 / 1)));
-        printf("\n\t\tFinal savings balance -> RM %.2f\n\n", final_amount);
-        break;
-    case 2:
-        final_amount = (initial_amount * (pow((1 + rate / 100 / 12),(12 * years)))) + (monthly_deposit * (((pow((1 + rate / 100 / 12),(12 * years))) - 1) / (rate / 100 / 12))) ;
-        printf("\n\t\tFinal savings balance -> RM %.2f\n\n", final_amount);
-        break;
-    case 3:
-        final_amount = (initial_amount * (pow((1 + rate / 100 / 4.0),(4.0* years)))) + (monthly_deposit * (((pow((1 + rate / 100 / 4.0),(4.0 * years))) - 1) / (rate / 100 / 4.0)));
-        printf("\n\t\tFinal savings balance -> RM %.2f\n\n", final_amount);
-        break;
-    case 4:
-        final_amount = (initial_amount * (pow((1 + rate / 100 / 2.0),(2.0* years)))) + (monthly_deposit * (((pow((1 + rate / 100 / 2.0),(2.0 * years))) - 1) / (rate / 100 / 4.0)));
-        printf("\n\t\tFinal savings balance -> RM %.2f\n\n", final_amount);
-        break;
-    default :
-        printf("\n\t\tPlease enter correct code for type of interest.");
-        break;
+        printf("\nAnnually interest (Compounded) in %% : ");
+        scanf("%lf", &rate);
+        if(rate > 0)
+        {
+            printf("\nNumber of years : ");
+            scanf("%d", &years);
+            if(years > 0)
+            {
+                printf("\nType of interest ( M : Monthly Q : Quarterly S : Semiannually A : Annually ) : ");
+                getchar();
+                scanf("%c", &type);
+                switch(type)
+                {
+                case 'M':
+                case 'm':
+                    final_amount = (initial_amount * (pow((1.0 + (rate / 100.0 / 12.0)),(12.0 * years))));
+                    break;
+                case 'Q':
+                case 'q':
+                    final_amount = (initial_amount * (pow((1.0 + (rate / 100.0 / 4.0)),(4.0 * years))));
+                    break;
+                case 'S':
+                case 's':
+                    final_amount = (initial_amount * (pow((1.0 + (rate / 100.0 / 2.0)),(2.0 * years))));
+                    break;
+                case 'A':
+                case 'a':
+                    final_amount = (initial_amount * (pow((1.0 + (rate / 100.0)),(years))));
+                    break;
+                default:
+                    printf("Please key in alphabet ( M / Q / S / A ).");
+                }
+                printf("\nFinal savings balance : RM %.2lf", final_amount);
+            }
+            else
+            {
+                printf("Please insert number more than 0.") ;
+            }
+        }
+        else
+        {
+            printf("\nPlease insert number more than 0.") ;
+        }
+    }
+    else
+    {
+        printf("\nPlease insert proper value.") ;
     }
 
     printf("\n\nEnter '0' to exit to main menu OR '1' to do another calculation. : ");
@@ -253,8 +257,8 @@ void ROI (void)
     //3- Calculation
     investment_gain = amt_returned - amt_invested;
     percentage_return = ((amt_returned - amt_invested)/amt_invested) * 100;
-    profit = (investment_gain / amt_returned) *100;
-    invested = (amt_invested/ amt_returned) *100;
+    profit = (investment_gain / amt_returned) * 100;
+    invested = (amt_invested/ amt_returned) * 100;
 
 
     //4- Output
@@ -267,82 +271,84 @@ void ROI (void)
 
 void car_loan(void)
 {
-	int loan_period, count = 0, year, month, choice;
-	double price, downpay, interest, intrst_sum = 0;
-	float rate, payment;
-	system("cls");
+    int loan_period, count = 0, year, month, choice;
+    double price, downpay, interest, intrst_sum = 0;
+    float rate, payment;
+    system("cls");
 
-	do
-	{
-		printf("\n\n\t\t\t\t\t***Car Loan Calculator***\n\n\n");
-		printf("\t\tCar Price (RM)\t\t\t: ");
-		scanf("%lf", &price);
-		printf("\n\t\tDownpayment (RM)\t\t: ");
-		scanf("%lf", &downpay);
-		printf("\n\t\tLoan Period (Years)\t\t: ");
-		scanf("%d", &loan_period);
-		printf("\n\t\tInterest Rate (%% P.A)\t\t: ");
-		scanf("%f", &rate);
-		do
-		{
-			{
-				printf("\n\t\tFirst loan payback (yy/mm)\t: ");
-				scanf("%d/%d", &year, &month);
-				rewind(stdin);
-				if (month > 12 || month <= 0)
-				{
-					printf("\nERROR: Invalid month input. Please try again!\n");
-				}
-			}
-		} while (month > 12 || month <= 0);
+    do
+    {
+        printf("\n\n\t\t\t\t\t***Car Loan Calculator***\n\n\n");
+        printf("\t\tCar Price (RM)\t\t\t: ");
+        scanf("%lf", &price);
+        printf("\n\t\tDownpayment (RM)\t\t: ");
+        scanf("%lf", &downpay);
+        printf("\n\t\tLoan Period (Years)\t\t: ");
+        scanf("%d", &loan_period);
+        printf("\n\t\tInterest Rate (%% P.A)\t\t: ");
+        scanf("%f", &rate);
+        do
+        {
+            {
+                printf("\n\t\tFirst loan payback (yy/mm)\t: ");
+                scanf("%d/%d", &year, &month);
+                rewind(stdin);
+                if (month > 12 || month <= 0)
+                {
+                    printf("\nERROR: Invalid month input. Please try again!\n");
+                }
+            }
+        }
+        while (month > 12 || month <= 0);
 
-		payment = (price - downpay) * (1 + (rate / 100) * loan_period) / (loan_period * 12);
-		printf("\n\t\tMonthly Repayment (RM)\t\t: %.2f ", payment);
-		printf("\n\n\nMonthly Installment Schedule\n----------------------------\n");
+        payment = (price - downpay) * (1 + (rate / 100) * loan_period) / (loan_period * 12);
+        printf("\n\t\tMonthly Repayment (RM)\t\t: %.2f ", payment);
+        printf("\n\n\nMonthly Installment Schedule\n----------------------------\n");
 
-		double balance = payment * (loan_period * 12), principal = price;
-		{
-			printf("\n\n   \t \t\tPayable  \tInterest     \tInterest \t               \t\ Balance\n");
-			printf("No.\t Date\t\tDue (RM) \tAccrued (RM) \tSum      \tPrincipal (RM) \t\ Due (RM)\n");
-			printf("--------------------------------------------------------------------------------------------------\n");
+        double balance = payment * (loan_period * 12), principal = price;
+        {
+            printf("\n\n   \t \t\tPayable  \tInterest     \tInterest \t               \t Balance\n");
+            printf("No.\t Date\t\tDue (RM) \tAccrued (RM) \tSum      \tPrincipal (RM) \t Due (RM)\n");
+            printf("--------------------------------------------------------------------------------------------------\n");
 
-			while (count != loan_period * 12)
-			{
-				count++;
-				balance -= payment;
-				interest = ((price - downpay) * (rate / 100) * loan_period) / (loan_period * 12);
-				intrst_sum += interest;
-				principal = payment - interest;
-				if (month > 12)
-				{
-					year++;
-					month = 1;
-				}
-				if (balance < 0)
-					balance = 0;
-				printf("%3d\t%d/%.2d\t\t%.2f\t\t%7.2lf\t\t%9.2lf\t%9.2lf\t%9.2lf\n", count, year, month, payment, interest, intrst_sum, principal, balance);
-				month++;
-			}
-		}
-		printf("\n\nChoose any one option to continue? (0 - Calculate another car loan; 1 - Return to main menu;\n 2 - Exit the program) : ");
-		scanf("%d", &choice);
+            while (count != loan_period * 12)
+            {
+                count++;
+                balance -= payment;
+                interest = ((price - downpay) * (rate / 100) * loan_period) / (loan_period * 12);
+                intrst_sum += interest;
+                principal = payment - interest;
+                if (month > 12)
+                {
+                    year++;
+                    month = 1;
+                }
+                if (balance < 0)
+                    balance = 0;
+                printf("%3d\t%d/%.2d\t\t%.2f\t\t%7.2lf\t\t%9.2lf\t%9.2lf\t%9.2lf\n", count, year, month, payment, interest, intrst_sum, principal, balance);
+                month++;
+            }
+        }
+        printf("\n\nChoose any one option to continue? (0 - Calculate another car loan; 1 - Return to main menu;\n 2 - Exit the program) : ");
+        scanf("%d", &choice);
 
-		if (choice == 0)
-		{
-			system("cls");
-		}
-		else if (choice == 1)
-		{
-			system("cls");
-		}
-		else if (choice == 2)
-		{
-			exit(0);
-		}
-		else
-		{
-			printf("Error!!!\n\n"); //Anyone is welcome to change the error message.
-			exit(0);
-		}
-	} while (choice == 0);
+        if (choice == 0)
+        {
+            system("cls");
+        }
+        else if (choice == 1)
+        {
+            system("cls");
+        }
+        else if (choice == 2)
+        {
+            exit(0);
+        }
+        else
+        {
+            printf("Error!!!\n\n"); //Anyone is welcome to change the error message.
+            exit(0);
+        }
+    }
+    while (choice == 0);
 }

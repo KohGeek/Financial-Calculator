@@ -4,14 +4,11 @@
 #include <math.h>
 #include "core.h"
 
-/** Usage of dchecker - Please read
- * dchecker takes in 4 arguments
+/** Usage of d/f/ichecker - Please read
+ * d - double, f - float, i - integer
+ * d/f/ichecker takes in 3 arguments
  *  - maximum: The maximum value that is accepted
  *  - minimum: The minimum value that is accepted
- *  - type: type of data,
- *      1 - long integer, in which _gint is written
- *      2 - float, in which _gfloat is written
- *      3 - double, in which _gdouble is written
  *  - allowzero: whether zero is an accepted value
  *      0 - no
  *      1 - yes
@@ -23,107 +20,127 @@
  *
  * To use it in the code, apply this format:
  * *_string = "[insert string here]\0";
- * dchecker(max,min,type,allowzero);
- * variable = _gint/_gfloat/_gdouble;
+ * variable = d/f/ichecker(max,min,allowzero);
  *
  * **/
 
-int dchecker(long max, long min, int type, int allowzero)
+long ichecker(long max, long min, int allowzero)
 {
     char input[40];
     int error = 1;
+    long value;
     while(error == 1)
     {
+        errno = 0;
         printf("%s(%ld - %ld)\t:",*_string, min, max);
-        scanf("%s",input);
+        char s;
+
+        scanf("%40s",input);
+        while((s = fgetc(stdin)) != '\n' && s != EOF); //clearing the input buffer in the most predictable manner
         const char* tempstr = input;
-        if(type == 1)  //type 1 = integer
+        value = strtol(tempstr,NULL,10);
+
+        if(value == 0 && allowzero == 0)
         {
-            long value;
-            value = strtol(tempstr,NULL,10);
-            if(value == 0 && allowzero == 0)
-            {
-                printf("\nValue detected is 0, possible input error. Please try again.\n\n");
-            }
-            else if(value == 0)
-            {
-                printf("\nValue detected is 0, but 0 is allowed. Possible input error?\n\n");
-                error = 0;
-                _gint = value;
-            }
-            else if(errno == ERANGE || value < min || value > max)
-            {
-                printf("\nValue keyed in is out of range, should be between %ld and %ld, please try again.\n\n", min, max);
-            }
-            else
-            {
-                error = 0;
-                _gint = value;
-            }
+            printf("\nValue detected is 0, possible input error. Please try again.\n\n");
         }
-        else if(type == 2)   //type 2 = float
+        else if(value == 0)
         {
-            float value;
-            value = strtof(tempstr,NULL);
-            if(value == 0 && allowzero == 0)
-            {
-                printf("\nValue detected is 0, possible input error. Please try again.\n\n");
-            }
-            else if(value == NAN || value == INFINITY)
-            {
-                printf("\nValue is invalid, please try again.\n\n");
-            }
-            else if(value == 0)
-            {
-                printf("\nValue detected is 0, but 0 is allowed. Possible input error?\n\n");
-                error = 0;
-                _gfloat = value;
-            }
-            else if(errno == ERANGE || value < min || value > max)
-            {
-                printf("\nValue keyed in is out of range, should be between %ld and %ld, please try again.\n\n", min ,max);
-            }
-            else
-            {
-                error = 0;
-                _gfloat = value;
-            }
+            printf("\nValue detected is 0, but 0 is allowed. Possible input error?\n\n");
+            error = 0;
         }
-        else if(type == 3)   //type 3 = double
+        else if(errno == ERANGE || value < min || value > max)
         {
-            double value;
-            value = strtod(tempstr, NULL);
-            if(value == 0 && allowzero == 0)
-            {
-                printf("\nValue detected is 0, possible input error. Please try again.\n\n");
-            }
-            else if(value == NAN || value == INFINITY)
-            {
-                printf("\nValue is invalid, please try again.\n\n");
-            }
-            else if(value == 0)
-            {
-                printf("\nValue detected is 0, but 0 is allowed. Possible input error?\n\n");
-                error = 0;
-                _gdouble = value;
-            }
-            else if(errno == ERANGE || value < min || value > max)
-            {
-                printf("\nValue keyed in is out of range, should be between %ld and %ld, please try again.\n\n", min, max);
-            }
-            else
-            {
-                error = 0;
-                _gdouble = value;
-            }
+            printf("\nValue keyed in is out of range, should be between %ld and %ld, please try again.\n\n", min, max);
         }
         else
         {
-            printf("Someone screwed up, check the code.\n\n");
-            return 2;
+            error = 0;
         }
     }
-    return 1;
+    return value;
+}
+
+float fchecker(long max, long min, int allowzero)
+{
+    char input[40];
+    int error = 1;
+    float value;
+    while(error == 1)
+    {
+        errno = 0;
+        printf("%s(%ld - %ld)\t:",*_string, min, max);
+        char s;
+
+        scanf("%40s",input);
+        while((s = fgetc(stdin)) != '\n' && s != EOF); //clearing the input buffer in the most predictable manner
+        const char* tempstr = input;
+        value = strtof(tempstr,NULL);
+
+        if(value == 0 && allowzero == 0)
+        {
+            printf("\nValue detected is 0, possible input error. Please try again.\n\n");
+        }
+        else if(value == NAN || value == INFINITY)
+        {
+            printf("\nValue is invalid, please try again.\n\n");
+        }
+        else if(value == 0)
+        {
+            printf("\nValue detected is 0, but 0 is allowed. Possible input error?\n\n");
+            error = 0;
+        }
+        else if(errno == ERANGE || value < min || value > max)
+        {
+            printf("\nValue keyed in is out of range, should be between %ld and %ld, please try again.\n\n", min,max);
+        }
+        else
+        {
+            error = 0;
+        }
+    }
+    return value;
+}
+
+double dchecker(long max, long min, int allowzero)
+{
+    char input[40];
+    int error = 1;
+    double value;
+    while(error == 1)
+    {
+        errno = 0;
+        printf("%s(%ld - %ld)\t:",*_string, min, max);
+        char s;
+
+        scanf("%40s",input);
+        while((s = fgetc(stdin)) != '\n' && s != EOF); //clearing the input buffer in the most predictable manner
+        const char* tempstr = input;
+        value = strtod(tempstr, NULL);
+
+        if(value == 0 && allowzero == 0)
+        {
+            printf("\nValue detected is 0, possible input error. Please try again.\n\n");
+        }
+        else if(value == NAN || value == INFINITY)
+        {
+            printf("\nValue is invalid, please try again.\n\n");
+        }
+        else if(value == 0)
+        {
+            printf("\nValue detected is 0, but 0 is allowed. Possible input error?\n\n");
+            error = 0;
+        }
+        else if(errno == ERANGE || value < min || value > max)
+        {
+            printf("\nValue keyed in is out of range, should be between %ld and %ld, please try again.\n\n", min, max);
+        }
+        else
+        {
+            error = 0;
+        }
+    }
+    return value;
 }
 
 /** Month_function - README
