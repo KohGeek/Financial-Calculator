@@ -170,61 +170,41 @@ void housing_loan(void)
 void bank_interest(void)
 {
     int years,cont_exit;
-    double initial_amount, final_amount, rate;
+    double initial_amount, final_amount, rate, freq;
     char type;
 
     printf("Initial amount : RM ");
     scanf("%lf", &initial_amount);
-    if(initial_amount > 0)
+    printf("\nAnnually interest (Compounded) in %% : ");
+    scanf("%lf", &rate);
+    printf("\nNumber of years : ");
+    scanf("%d", &years);
+    printf("\nType of interest ( M : Monthly Q : Quarterly S : Semiannually A : Annually ) : ");
+    getchar();
+    scanf("%c", &type);
+    switch(type)
     {
-        printf("\nAnnually interest (Compounded) in %% : ");
-        scanf("%lf", &rate);
-        if(rate > 0)
-        {
-            printf("\nNumber of years : ");
-            scanf("%d", &years);
-            if(years > 0)
-            {
-                printf("\nType of interest ( M : Monthly Q : Quarterly S : Semiannually A : Annually ) : ");
-                getchar();
-                scanf("%c", &type);
-                switch(type)
-                {
-                case 'M':
-                case 'm':
-                    final_amount = (initial_amount * (pow((1.0 + (rate / 100.0 / 12.0)),(12.0 * years))));
-                    break;
-                case 'Q':
-                case 'q':
-                    final_amount = (initial_amount * (pow((1.0 + (rate / 100.0 / 4.0)),(4.0 * years))));
-                    break;
-                case 'S':
-                case 's':
-                    final_amount = (initial_amount * (pow((1.0 + (rate / 100.0 / 2.0)),(2.0 * years))));
-                    break;
-                case 'A':
-                case 'a':
-                    final_amount = (initial_amount * (pow((1.0 + (rate / 100.0)),(years))));
-                    break;
-                default:
-                    printf("Please key in alphabet ( M / Q / S / A ).");
-                }
-                printf("\nFinal savings balance : RM %.2lf", final_amount);
-            }
-            else
-            {
-                printf("Please insert number more than 0.") ;
-            }
-        }
-        else
-        {
-            printf("\nPlease insert number more than 0.") ;
-        }
+    case 'M':
+    case 'm':
+        freq = 12.0;
+        break;
+    case 'Q':
+    case 'q':
+        freq = 4.0;
+        break;
+    case 'S':
+    case 's':
+        freq = 2.0;
+        break;
+    case 'A':
+    case 'a':
+        freq = 1.0;
+        break;
+    default:
+        printf("Please key in alphabet ( M / Q / S / A ).");
     }
-    else
-    {
-        printf("\nPlease insert proper value.") ;
-    }
+    final_amount = (initial_amount * (pow((1.0 + (rate / 100.0 / freq)),(freq * years))));
+    printf("\nFinal savings balance : RM %.2lf", final_amount);
 
     printf("\n\nEnter '0' to exit to main menu OR '1' to do another calculation. : ");
     scanf("%d", &cont_exit);
@@ -256,9 +236,9 @@ void ROI (void)
 
     //3- Calculation
     investment_gain = amt_returned - amt_invested;
-    percentage_return = ((amt_returned - amt_invested)/amt_invested) * 100;
+    percentage_return = ((amt_returned - amt_invested) / amt_invested) * 100;
     profit = (investment_gain / amt_returned) * 100;
-    invested = (amt_invested/ amt_returned) * 100;
+    invested = (amt_invested / amt_returned) * 100;
 
 
     //4- Output

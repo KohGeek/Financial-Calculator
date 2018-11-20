@@ -17,9 +17,9 @@
  * - percentage: whether percentage is used
  *      0 - no
  *      1 - yes
- * 
+ *
  * This allows for an alternative percentage prompt when value is out of range.
- * 
+ *
  * (Due to the limitation of standard C library and
  * time constraint, junk values are often treated as 0,
  * thus care has been taken to specifically prompt the
@@ -76,7 +76,7 @@ float fchecker(float max, float min, int allowzero, int percentage)
     while(error == 1)
     {
         errno = 0;
-        printf("%s(%f - %f)\t:",*_string, min, max);
+        printf("%s(%.1f - %.1f)\t:",*_string, min, max);
         char s;
 
         scanf("%40s",input);
@@ -120,7 +120,7 @@ double dchecker(double max, double min, int allowzero)
     while(error == 1)
     {
         errno = 0;
-        printf("%s %lf - %lf)\t:",*_string, min, max);
+        printf("%s %.1lf - %.1lf)\t:",*_string, min, max);
         char s;
 
         scanf("%40s",input);
