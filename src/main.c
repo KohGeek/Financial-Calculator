@@ -178,21 +178,16 @@ void housing_loan(void)
                 printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
                 scanf("%d", &cont_exit);
                 flush();
-                if(cont_exit != 1 && cont_exit != 0 && cont_exit != 2)
-                {
-                    printf("\nInvalid option, please try again.\n");
-                }
+                if (cont_exit == 1)
+                    system("cls");
+                else if (cont_exit == 0)
+                    system("cls");
+                else if (cont_exit == 2)
+                    exit(0);
+                else
+                    printf("\nInvalid option, please try again.");
             }
-            while(cont_exit != 1 && cont_exit != 0 && cont_exit != 2);
-
-            if (cont_exit == 2)
-            {
-                exit(0);
-            }
-            else
-            {
-                system("cls");
-            }
+            while(cont_exit != 0 && cont_exit != 1);
         }
     }
     while(cont_exit == 0);
