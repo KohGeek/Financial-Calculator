@@ -195,12 +195,12 @@ void housing_loan(void)
             }
         }
     }
-    while (cont_exit == 0);
+    while(cont_exit == 0);
 }
 
 void bank_interest(void)
 {
-    int years,cont_exit;
+    int years, cont_exit = 0;
     double initial_amount, final_amount, rate, freq;
     char type;
     system("cls");
@@ -274,14 +274,14 @@ void bank_interest(void)
                 printf("\nInvalid option, please try again.");
         }
     }
-    while(cont_exit == 1);
+    while(cont_exit == 0);
 }
 
 void ROI(void)
 {
     //1- Declaration
     float amt_invested, amt_returned, investment_time, investment_gain, percentage_return, annualROI;
-    int cont_exit;
+    int cont_exit = 0;
     system("cls");
 
     //2- Input
@@ -327,7 +327,7 @@ void ROI(void)
                 printf("\nInvalid option, please try again.");
         }
     }
-    while(cont_exit == 1);
+    while(cont_exit == 0);
 }
 
 void car_loan(void)
@@ -412,7 +412,7 @@ void car_loan(void)
 
 void EPF(void)
 {
-    int c_age, r_age, life_expect, retire_yr_on, spending_yr_period, cont_exit;
+    int c_age, r_age, life_expect, retire_yr_on, spending_yr_period, cont_exit = 0;
     float total_saving = 0, inflation, month_income;
     system("cls");
 
@@ -467,5 +467,5 @@ void EPF(void)
                 printf("\nInvalid option, please try again.");
         }
     }
-    while(cont_exit == 1);
+    while(cont_exit == 0);
 }
