@@ -259,7 +259,7 @@ void bank_interest(void)
         final_amount = (initial_amount * (pow((1.0 + (rate / 100.0 / freq)),(freq * years))));
         printf("\n\t\tFinal savings balance : RM %.2lf", final_amount);
 
-        while(cont_exit != 0 && cont_exit != 1)
+        do
         {
             printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
             scanf("%d", &cont_exit);
@@ -273,6 +273,7 @@ void bank_interest(void)
             else
                 printf("\nInvalid option, please try again.");
         }
+        while(cont_exit != 0 && cont_exit != 1);
     }
     while(cont_exit == 0);
 }
@@ -312,7 +313,7 @@ void ROI(void)
         printf("\t\tAnnualised ROI: %.2f%% \n", annualROI);
 
         //5 - Options
-        while(cont_exit != 0 && cont_exit != 1)
+        do
         {
             printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
             scanf("%d", &cont_exit);
@@ -326,6 +327,7 @@ void ROI(void)
             else
                 printf("\nInvalid option, please try again.");
         }
+        while(cont_exit != 0 && cont_exit != 1);
     }
     while(cont_exit == 0);
 }
@@ -392,7 +394,7 @@ void car_loan(void)
             month++;
         }
 
-        while(cont_exit != 0 && cont_exit != 1)
+        do
         {
             printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
             scanf("%d", &cont_exit);
@@ -406,6 +408,7 @@ void car_loan(void)
             else
                 printf("\nInvalid option, please try again.");
         }
+        while(cont_exit != 0 && cont_exit != 1);
     }
     while (cont_exit == 0);
 }
@@ -452,7 +455,7 @@ void EPF(void)
         printf("\t\tSpending year period : %d years\n\n", spending_yr_period);
         printf("\t\tTotal saving required by retirement : RM%.2f\n", total_saving);
 
-        while(cont_exit != 0 && cont_exit != 1)
+        do
         {
             printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
             scanf("%d", &cont_exit);
@@ -466,6 +469,7 @@ void EPF(void)
             else
                 printf("\nInvalid option, please try again.");
         }
+        while(cont_exit != 0 && cont_exit != 1);
     }
     while(cont_exit == 0);
 }
