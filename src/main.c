@@ -369,8 +369,8 @@ void car_loan(void)
         printf("\n\n\n\t\t\t\tMonthly Installment Schedule\n\t\t\t\t----------------------------\n");
 
         double balance = payment * (loan_period * 12), principal = price;
-        printf("\n\n   \t \t\tPayable  \tInterest     \tInterest \t               \t Balance\n");
-        printf("No.\t Date\t\tDue (RM) \tAccrued (RM) \tSum (RM) \tPrincipal (RM) \t Due (RM)\n");
+        printf("\n\n   \t \t\tPayable   \tInterest     \tInterest \t               \t Balance\n");
+        printf("No.\t Date\t\tDue (RM)  \tAccrued (RM) \tSum (RM) \tPrincipal (RM) \t Due (RM)\n");
         printf("--------------------------------------------------------------------------------------------------\n");
 
         while (count != loan_period * 12)
@@ -387,7 +387,8 @@ void car_loan(void)
             }
             if (balance < 0)
                 balance = 0;
-            printf("%3d\t%d/%.2d\t\t%.2f\t\t%7.2lf\t\t%9.2lf\t%9.2lf\t%9.2lf\n", count, year, month, payment, interest, intrst_sum, principal, balance);
+            month_function(month);
+            printf("%3d\t%s %d\t%7.2f   \t%7.2lf  \t%9.2lf\t%9.2lf\t%9.2lf\n", count, *_cmonth, year, payment, interest, intrst_sum, principal, balance);
             month++;
         }
 
