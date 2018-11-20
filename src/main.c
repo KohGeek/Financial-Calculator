@@ -65,11 +65,11 @@ int main(void)
 void main_menu(void)
 {
     printf("\n\n\t\t\t\t\t***SIMPLE FINANCIAL CALCULATOR***\n\n");
-    printf("\t\t\t 1  Housing Loan\n");
-    printf("\t\t\t 2  Car Loan\n");
+    printf("\t\t\t 1  Housing Loan Calculator\n");
+    printf("\t\t\t 2  Car Loan Calculator\n");
     printf("\t\t\t 3  Return of Investment (ROI) Calculator\n");
     printf("\t\t\t 4  Bank Interest Calculator\n");
-    printf("\t\t\t 5  EPF Retirement Calculator\n");
+    printf("\t\t\t 5  EPF Retirement Calculator\n\n");
     printf("\t\t\t 9  Help & About\n");
     printf("\t\t\t 0  Exit\n\n\n");
 }
@@ -332,7 +332,7 @@ void ROI(void)
 
 void car_loan(void)
 {
-    int loan_period, count = 0, year, month, cont_exit;
+    int loan_period, count = 0, year, month, cont_exit = 0;
     double price, downpay, interest, intrst_sum = 0;
     float rate, payment;
     system("cls");

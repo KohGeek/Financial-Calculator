@@ -4,10 +4,16 @@
 #include <math.h>
 #include "core.h"
 
+/** flush()
+ * flush() is used to clear input buffer in a safe and clean manner
+ * by looping empty loops
+ * 
+**/
+
 void flush()
 {
     char s;
-    while((s = fgetc(stdin)) != '\n' && s != EOF); //clearing the input buffer in the most predictable manner
+    while((s = fgetc(stdin)) != '\n' && s != EOF); 
 }
 
 /** Usage of d/f/ichecker - Please read
@@ -23,8 +29,6 @@ void flush()
  *      1 - prefix
  *      2 - suffix
  *      3 - suffix with space
- *
- * This allows for an alternative percentage prompt when value is out of range.
  *
  * (Due to the limitation of standard C library and
  * time constraint, junk values are often treated as 0,
