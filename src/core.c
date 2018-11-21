@@ -7,7 +7,7 @@
 #include "core.h"
 
 /** flush()
- * 
+ *
  * flush() is used to clear input buffer in a safe and clean manner
  * by looping through the input buffer. Additional value can be returned
  * to help validate
@@ -18,12 +18,13 @@ int flush()
 {
     int hasextra = 0;
     char s;
-    while((s = fgetc(stdin)) != '\n' && s != EOF) hasextra = 1;
+    while((s = fgetc(stdin)) != '\n' && s != EOF)
+        hasextra = 1;
     return hasextra;
 }
 
 /** Usage of d/f/ichecker - Please read
- * 
+ *
  * d - double, f - float, i - integer
  * d/f/ichecker takes in 4 arguments
  *  - maximum: The maximum value that is accepted
@@ -78,9 +79,12 @@ long ichecker(long max, long min, int allowzero, int psfix)
         char tempstr[20];
         int length;
         strncpy(tempstr,input,20);
-        if(strlen(tempstr) <= 20){
+        if(strlen(tempstr) <= 20)
+        {
             length = strlen(tempstr);
-        }else{
+        }
+        else
+        {
             length = 20;
         }
 
@@ -163,9 +167,12 @@ float fchecker(float max, float min, int allowzero, int psfix)
         char tempstr[20];
         int length;
         strncpy(tempstr,input,20);
-        if(strlen(tempstr) <= 20){
+        if(strlen(tempstr) <= 20)
+        {
             length = strlen(tempstr);
-        }else{
+        }
+        else
+        {
             length = 20;
         }
 
@@ -252,9 +259,12 @@ double dchecker(double max, double min, int allowzero, int psfix)
         char tempstr[20];
         int length;
         strncpy(tempstr,input,20);
-        if(strlen(tempstr) <= 20){
+        if(strlen(tempstr) <= 20)
+        {
             length = strlen(tempstr);
-        }else{
+        }
+        else
+        {
             length = 20;
         }
 
@@ -309,13 +319,13 @@ double dchecker(double max, double min, int allowzero, int psfix)
 }
 
 /** Month_function - README
- * 
+ *
  * The following function takes in an integer value
  * and returns a global string (_cmonth)
  *
- * This code lacks any sort of error checking functionality, 
+ * This code lacks any sort of error checking functionality,
  * thus data should be sanitised before using this function.
- * 
+ *
  **/
 
 void month_function(int nmonth)

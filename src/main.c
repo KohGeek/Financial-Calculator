@@ -30,7 +30,8 @@ int main(void)
         printf("Enter an option to continue: ");
 
         scanf("%d", &opt); //every input is done this way to prevent input errors
-        if (flush() == 1){
+        if (flush() == 1)
+        {
             opt = 10;
         }
 
@@ -119,7 +120,8 @@ void housing_loan(void)
             printf("\nChoose any one option to continue? (0 - Calculate again; 1 - Display full repayment schedule;\n 2 - Exit to main menu; 3 - Exit program) : ");
 
             scanf("%d", &cont_exit);
-            if (flush() == 1){
+            if (flush() == 1)
+            {
                 cont_exit = 3;
             }
 
@@ -187,7 +189,8 @@ void housing_loan(void)
                 printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
 
                 scanf("%d", &cont_exit);
-                if (flush() == 1){
+                if (flush() == 1)
+                {
                     cont_exit = 3;
                 }
 
@@ -276,7 +279,8 @@ void car_loan(void)
             printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
 
             scanf("%d", &cont_exit);
-            if (flush() == 1){
+            if (flush() == 1)
+            {
                 cont_exit = 3;
             }
 
@@ -326,7 +330,8 @@ void bank_interest(void)
             printf("\n\t\t\tSelect : ");
 
             scanf("%c", &type);
-            if (flush() == 1){
+            if (flush() == 1)
+            {
                 type = 'f';
             }
 
@@ -366,7 +371,8 @@ void bank_interest(void)
             printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
 
             scanf("%d", &cont_exit);
-            if (flush() == 1){
+            if (flush() == 1)
+            {
                 cont_exit = 3;
             }
 
@@ -421,7 +427,8 @@ void ROI(void)
             printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
 
             scanf("%d", &cont_exit);
-            if (flush() == 1){
+            if (flush() == 1)
+            {
                 cont_exit = 3;
             }
 
@@ -488,7 +495,8 @@ void EPF(void)
             printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
 
             scanf("%d", &cont_exit);
-            if (flush() == 1){
+            if (flush() == 1)
+            {
                 cont_exit = 3;
             }
 
@@ -508,9 +516,10 @@ void EPF(void)
 
 }
 
-void help(void){
+void help(void)
+{
     system("cls");
-    
+
     printf("\n\n\t\t\t\t\t***Help & About***\n\n");
     printf("\t\tVersion: %s (%s)\n\n", FULLVERSION_STRING, STATUS);
 
@@ -548,7 +557,7 @@ void help(void){
 
     printf("\t\tThis program is licensed under GNU General Public License v3.\n\n");
     printf("\t\tThis project is a collaboration work of:\n");
-    printf("\t\t  - Koh Jun Dong\n\t\t  - Liang Han\n\t\t  - Qiao Xian\n\t\t  - Choy Chun Wei\n\t\t  - Yeu Herng\n\t\t  - Tan Yong Kwong\n\n\n");
+    printf("\t\t  - Koh Jun Dong\n\t\t  - Siew Liang Han\n\t\t  - Ting Qiao Xian\n\t\t  - Choy Chun Wei\n\t\t  - Low Yeu Herng\n\t\t  - Tan Yong Kwong\n\n\n");
 
     printf("Press any key to continue...");
     getch();
