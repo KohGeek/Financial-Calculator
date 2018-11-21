@@ -143,6 +143,8 @@ void housing_loan(void)
 
         if (cont_exit == 1)
         {
+            printf("\n\n\t\t\t\t\t***Housing Loan Calculator***\n\n\n");
+            
             *_string = "\t\tFirst instalment\0";
             *_units = "Year\0";
             year = ichecker(2200,1918,0,1);
