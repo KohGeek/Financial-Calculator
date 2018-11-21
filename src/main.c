@@ -450,7 +450,7 @@ void ROI(void)
 
 void EPF(void)
 {
-    int c_age, r_age, life_expect, retire_yr_on, spending_yr_period, cont_exit = 0;
+    int c_age, r_age, life_expect, retire_yr_on, spending_yr_period, cont_exit = 0 , avg_incre , contri_rate , acc , avg_dvd ;
     float total_saving = 0, inflation, month_income;
     system("cls");
 
@@ -475,6 +475,18 @@ void EPF(void)
         *_string = "\t\tMonthly payout\0";
         *_units = "RM\0";
         month_income = fchecker(1000000,0,1,1);
+
+        //EPF saving calculator
+        printf("\t\tAverage Salary Increment :\n");
+        scanf("%f" , &avg_incre);
+        printf("\t\tContribution Rate :\n");
+        scanf("%f" , &contri_rate);
+        printf("\t\tAverage Dividend ;\n")
+        scanf("%f" , &avg_dvd);
+        printf("\t\tMoney in Acc :\n");
+        scanf("%f" , &acc);
+
+
 
         retire_yr_on = r_age - c_age;
         spending_yr_period = life_expect - r_age;
