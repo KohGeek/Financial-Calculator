@@ -17,10 +17,11 @@ void bank_interest(void);
 void ROI(void);
 void car_loan(void);
 void EPF(void);
+void help(void);
 
 int main(void)
 {
-    int opt = 7;
+    int opt = 10;
 
     do
     {
@@ -28,7 +29,9 @@ int main(void)
 
         printf("Enter an option to continue: ");
         scanf("%d", &opt);
-        flush();
+        if (flush() == 1){
+            opt = 10;
+        }
 
         switch(opt)
         {
@@ -50,11 +53,11 @@ int main(void)
             EPF();
             break;
         case 9:
-            //help();
+            help();
             break;
         default:
             system("cls");
-            printf("Invalid input, please try again.");
+            printf("\nInvalid input, please try again.");
         }
     }
     while (opt != 0);
@@ -100,14 +103,6 @@ void housing_loan(void)
         *_units = "% P.A.\0";
         intrst_rate = fchecker(10,2,0,2);
 
-        *_string = "\t\tFirst installment\0";
-        *_units = "Year\0";
-        year = ichecker(2200,1918,0,1);
-
-        *_string = "\t\tFirst installment\0";
-        *_units = "Month\0";
-        month = ichecker(12,1,0,1);
-
         loan_prcnt *= 0.01;
         tenure *= 12;
         loan_amt = loan_prcnt * cost;
@@ -121,8 +116,12 @@ void housing_loan(void)
         do
         {
             printf("\nChoose any one option to continue? (0 - Calculate again; 1 - Display full repayment schedule;\n 2 - Exit to main menu; 3 - Exit program) : ");
+
             scanf("%d", &cont_exit);
-            flush();
+            if (flush() == 1){
+                cont_exit = 3;
+            }
+
             if(cont_exit == 3)
             {
                 exit(0);
@@ -144,13 +143,21 @@ void housing_loan(void)
 
         if (cont_exit == 1)
         {
+            *_string = "\t\tFirst instalment\0";
+            *_units = "Year\0";
+            year = ichecker(2200,1918,0,1);
+
+            *_string = "\t\tFirst instalment\0";
+            *_units = "Month\0";
+            month = ichecker(12,1,0,1);
+
             int no = 0;
             double balance = loan_amt, intrst_sum = 0;
             float intrst_accrued, princpl;
             printf("\n\nLoading...\n\n");
             Sleep(1200);
             system("cls");
-            printf("\n\nMonthly Installment Schedule\n----------------------------\n");
+            printf("\n\nMonthly Instalment Schedule\n-----------------------------\n");
             printf("\n\n   \t \t\tPayable  \tInterest      \t Interest \tPrincipal      \tBalance\n");
             printf("No.\t Date\t\tDue (RM) \tAccrued (RM)  \t Sum (RM) \t(RM)           \tDue (RM)\n");
             printf("-------------------------------------------------------------------------------------------------\n");
@@ -176,8 +183,12 @@ void housing_loan(void)
             do
             {
                 printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
+
                 scanf("%d", &cont_exit);
-                flush();
+                if (flush() == 1){
+                    cont_exit = 3;
+                }
+
                 if (cont_exit == 1)
                     system("cls");
                 else if (cont_exit == 0)
@@ -220,17 +231,17 @@ void car_loan(void)
         *_units = "% P.A.\0";
         rate = fchecker(10,1,0,2);
 
-        *_string = "\t\tFirst installment\0";
+        *_string = "\t\tFirst instalment\0";
         *_units = "Year\0";
         year = ichecker(2200,1918,0,1);
 
-        *_string = "\t\tFirst installment\0";
+        *_string = "\t\tFirst instalment\0";
         *_units = "Month\0";
         month = ichecker(12,1,0,1);
 
         payment = (price - downpay) * (1 + (rate / 100) * loan_period) / (loan_period * 12);
         printf("\n\t\tMonthly Repayment (RM)\t\t: %.2f ", payment);
-        printf("\n\n\n\t\t\t\tMonthly Installment Schedule\n\t\t\t\t----------------------------\n");
+        printf("\n\n\n\t\t\t\tMonthly Instalment Schedule\n\t\t\t\t-----------------------------\n");
 
         double balance = payment * (loan_period * 12), principal = price;
         printf("\n\n   \t \t\tPayable   \tInterest     \tInterest \t               \t Balance\n");
@@ -259,8 +270,12 @@ void car_loan(void)
         do
         {
             printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
+
             scanf("%d", &cont_exit);
-            flush();
+            if (flush() == 1){
+                cont_exit = 3;
+            }
+
             if (cont_exit == 1)
                 system("cls");
             else if (cont_exit == 0)
@@ -303,8 +318,12 @@ void bank_interest(void)
             printf("\n\t\t\tType of interest:\n\n");
             printf("\t\t\tM - Monthly\n\t\t\tQ - Quarterly\n\t\t\tS - Semi-Annually\n\t\t\tA - Annually\n");
             printf("\n\t\t\tSelect : ");
+
             scanf("%c", &type);
-            flush();
+            if (flush() == 1){
+                type = 'f';
+            }
+
             switch(type)
             {
             case 'M':
@@ -339,8 +358,12 @@ void bank_interest(void)
         do
         {
             printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
+
             scanf("%d", &cont_exit);
-            flush();
+            if (flush() == 1){
+                cont_exit = 3;
+            }
+
             if (cont_exit == 1)
                 system("cls");
             else if (cont_exit == 0)
@@ -393,8 +416,12 @@ void ROI(void)
         do
         {
             printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
+
             scanf("%d", &cont_exit);
-            flush();
+            if (flush() == 1){
+                cont_exit = 3;
+            }
+
             if (cont_exit == 1)
                 system("cls");
             else if (cont_exit == 0)
@@ -454,8 +481,12 @@ void EPF(void)
         do
         {
             printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
+
             scanf("%d", &cont_exit);
-            flush();
+            if (flush() == 1){
+                cont_exit = 3;
+            }
+
             if (cont_exit == 1)
                 system("cls");
             else if (cont_exit == 0)
@@ -468,4 +499,50 @@ void EPF(void)
         while(cont_exit != 0 && cont_exit != 1);
     }
     while(cont_exit == 0);
+}
+
+void help(void){
+    system("cls");
+    printf("\n\n\t\t\t\t\t***Help & About***\n\n");
+    printf("\t\tVersion: %s (%s)\n\n", FULLVERSION_STRING, STATUS);
+
+    printf("\t\tHousing Loan Calculator\n");
+    printf("\t\t~~~~~~~~~~~~~~~~~~~~~~~\n");
+    printf("\t\tThe calculator assists the user in calculation of\n\t\thousing loan instalment.\n");
+    printf("\t\tFull amortization schedule is provided at user's\n\t\trequest, by provided the date of first instalment.\n");
+    printf("\t\t---\n");
+    printf("\t\tUser have to provide 4 value:\n\t\t  - Property Cost\n\t\t  - Loan Percentage\n\t\t  - Loan Tenure\n\t\t  - Interest Rate.\n\n");
+
+
+    printf("\t\tCar Loan Calculator\n");
+    printf("\t\t~~~~~~~~~~~~~~~~~~~\n");
+    printf("\t\tThe calculator assists the user in calculation of car\n\t\tloan instalment.\n");
+    printf("\t\t---\n");
+    printf("\t\tUser have to provide 5 value:\n\t\t  - Car Cost\n\t\t  - Down Payment\n\t\t  - Date of First Instalment\n\t\t  - Loan Tenure\n\t\t  - Interest Rate.\n\n");
+
+    printf("\t\tFixed Deposit Interest Calculator\n");
+    printf("\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+    printf("\t\tThe calculator allows the user to calculate the final\n\t\tdeposit count according to interest rate.\n");
+    printf("\t\t---\n");
+    printf("\t\tUser have to provide 4 value:\n\t\t  - Initial deposit\n\t\t  - Annual Compounded Interest Rate\n\t\t  - Years of Deposit\n\t\t  - Type of Interest\n\n");
+
+    printf("\t\tReturn of Investment Calculator\n");
+    printf("\t\t~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+    printf("\t\tThe calculator provides the user with annualised ROI and\n\t\tROI of an expected investment return.\n");
+    printf("\t\t---\n");
+    printf("\t\tUser have to provide 3 value:\n\t\t  - Amount Invested\n\t\t  - Amount Returned\n\t\t  - Years of Investment\n\n");
+
+    printf("\t\tEPF Retirement Calculator\n");
+    printf("\t\t~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+    printf("\t\tThe calculator assists the user in planning for retirement\n\t\tand calculating EPF funds.\n");
+    printf("\t\t---\n");
+    printf("\t\tUser have to provide n value:\n\t\t  - Current Age\n\t\t  - Retirement Age\n\t\t  - Life Expectancy\n\t\t  - Inflation Rate\n\t\t  - Monthly Payout\n\n\n");
+
+    printf("\t\tThis program is licensed under GNU General Public License v3.\n\n");
+    printf("\t\tThis project is a collaboration work of:\n");
+    printf("\t\t  - Koh Jun Dong\n\t\t  - Liang Han\n\t\t  - Qiao Xian\n\t\t  - Choy Chun Wei\n\t\t  - Yeu Herng\n\t\t  - Tan Yong Kwong\n\n\n");
+
+    printf("Press any key to continue...");
+    getch();
+    system("cls");
 }

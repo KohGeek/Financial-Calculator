@@ -12,10 +12,12 @@
  *
 **/
 
-void flush()
+int flush()
 {
+    int hasextra = 0;
     char s;
-    while((s = fgetc(stdin)) != '\n' && s != EOF);
+    while((s = fgetc(stdin)) != '\n' && s != EOF) hasextra = 1;
+    return hasextra;
 }
 
 /** Usage of d/f/ichecker - Please read
@@ -74,9 +76,17 @@ long ichecker(long max, long min, int allowzero, int psfix)
 
         scanf("%20s",input);
         flush();
+
         char tempstr[20];
+        int length;
         strncpy(tempstr,input,20);
-        for(unsigned int i = 0; i < strlen(tempstr); i++)
+        if(strlen(tempstr) <= 20){
+            length = strlen(tempstr);
+        }else{
+            length = 20;
+        }
+
+        for(int i = 0; i < length; i++)
         {
             if(isdigit(tempstr[i]) == 0)
             {
@@ -151,9 +161,17 @@ float fchecker(float max, float min, int allowzero, int psfix)
 
         scanf("%20s",input);
         flush();
+
         char tempstr[20];
+        int length;
         strncpy(tempstr,input,20);
-        for(unsigned int i = 0; i < strlen(tempstr); i++)
+        if(strlen(tempstr) <= 20){
+            length = strlen(tempstr);
+        }else{
+            length = 20;
+        }
+
+        for(int i = 0; i < length; i++)
         {
             if(isdigit(tempstr[i]) == 0)
             {
@@ -232,9 +250,17 @@ double dchecker(double max, double min, int allowzero, int psfix)
 
         scanf("%20s",input);
         flush();
+
         char tempstr[20];
+        int length;
         strncpy(tempstr,input,20);
-        for(unsigned int i = 0; i < strlen(tempstr); i++)
+        if(strlen(tempstr) <= 20){
+            length = strlen(tempstr);
+        }else{
+            length = 20;
+        }
+
+        for(int i = 0; i < length; i++)
         {
             if(isdigit(tempstr[i]) == 0)
             {

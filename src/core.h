@@ -5,7 +5,7 @@ extern char* _cmonth[4];
 extern char* _string[120];
 extern char* _units[10];
 
-void flush();
+int flush();
 void month_function(int nmonth);
 long ichecker(long max, long min, int allowzero, int psfix);
 float fchecker(float max, float min, int allowzero, int psfix);
