@@ -7,8 +7,10 @@
 #include "core.h"
 
 /** flush()
+ * 
  * flush() is used to clear input buffer in a safe and clean manner
- * by looping empty loops
+ * by looping through the input buffer. Additional value can be returned
+ * to help validate
  *
 **/
 
@@ -21,6 +23,7 @@ int flush()
 }
 
 /** Usage of d/f/ichecker - Please read
+ * 
  * d - double, f - float, i - integer
  * d/f/ichecker takes in 4 arguments
  *  - maximum: The maximum value that is accepted
@@ -34,13 +37,8 @@ int flush()
  *      2 - suffix
  *      3 - suffix with space
  *
- * (Due to the limitation of standard C library and
- * time constraint, junk values are often treated as 0,
- * thus care has been taken to specifically prompt the
- * user about possible 0 value)
- *
  * To use it in the code, apply this format:
- * *_string = "[insert string here]\0"; \0 is needed to end the string properly
+ * *_string = "[insert string here]\0"; (\0 is needed to end the string properly)
  * *_units = "[insert unit here]\0";
  * variable = d/f/ichecker(max,min,allowzero,psfix);
  *
@@ -311,11 +309,13 @@ double dchecker(double max, double min, int allowzero, int psfix)
 }
 
 /** Month_function - README
+ * 
  * The following function takes in an integer value
  * and returns a global string (_cmonth)
  *
  * This code lacks any sort of error checking functionality, 
  * thus data should be sanitised before using this function.
+ * 
  **/
 
 void month_function(int nmonth)

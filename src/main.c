@@ -28,7 +28,8 @@ int main(void)
         main_menu();
 
         printf("Enter an option to continue: ");
-        scanf("%d", &opt);
+
+        scanf("%d", &opt); //every input is done this way to prevent input errors
         if (flush() == 1){
             opt = 10;
         }
@@ -87,7 +88,8 @@ void housing_loan(void)
     do
     {
         printf("\n\n\t\t\t\t\t***Housing Loan Calculator***\n\n\n");
-        *_string = "\t\tCost of House\0";
+
+        *_string = "\t\tCost of House\0"; //usage of dchecker/ichecker/fchecker, please refer to core.c
         *_units = "RM\0";
         cost = dchecker(100000000,1,0,1);
 
@@ -110,10 +112,9 @@ void housing_loan(void)
         pow_func = pow((1 + monthly_intrst), tenure);
         installment = loan_amt * (monthly_intrst / (1 - (1 / pow_func)));
 
-
         printf("\n\t\t**Monthly repayment**\t: RM %.2f\n\n", installment);
 
-        do
+        do //provide option for users to quit or to repeat calculations
         {
             printf("\nChoose any one option to continue? (0 - Calculate again; 1 - Display full repayment schedule;\n 2 - Exit to main menu; 3 - Exit program) : ");
 
@@ -138,13 +139,12 @@ void housing_loan(void)
         }
         while(cont_exit != 1 && cont_exit != 0);
 
-
         system("cls");
 
-        if (cont_exit == 1)
+        if (cont_exit == 1) //This part pertains to the full amortization schedule
         {
             printf("\n\n\t\t\t\t\t***Housing Loan Calculator***\n\n\n");
-            
+
             *_string = "\t\tFirst instalment\0";
             *_units = "Year\0";
             year = ichecker(2200,1918,0,1);
@@ -202,8 +202,10 @@ void housing_loan(void)
             }
             while(cont_exit != 0 && cont_exit != 1);
         }
+
     }
     while(cont_exit == 0);
+
 }
 
 void car_loan(void)
@@ -288,8 +290,10 @@ void car_loan(void)
                 printf("\nInvalid option, please try again.");
         }
         while(cont_exit != 0 && cont_exit != 1);
+
     }
     while (cont_exit == 0);
+
 }
 
 void bank_interest(void)
@@ -376,18 +380,18 @@ void bank_interest(void)
                 printf("\nInvalid option, please try again.");
         }
         while(cont_exit != 0 && cont_exit != 1);
+
     }
     while(cont_exit == 0);
+
 }
 
 void ROI(void)
 {
-    //1- Declaration
     float amt_invested, amt_returned, investment_time, investment_gain, percentage_return, annualROI;
     int cont_exit = 0;
     system("cls");
 
-    //2- Input
     do
     {
         printf("\n\n\t\t\t\t\t***Return of Investment Calculator***\n\n\n");
@@ -404,17 +408,14 @@ void ROI(void)
         *_units = "years\0";
         investment_time = ichecker(100,1,0,3);
 
-        //3- Calculation
         investment_gain = amt_returned - amt_invested;
         percentage_return = ((amt_returned - amt_invested) / amt_invested) * 100;
         annualROI = (pow((1 + percentage_return/100),(1/investment_time)) - 1) * 100;
 
-        //4- Output
         printf("\n\n\n\t\tInvestment Gain: RM%.2f \n\n", investment_gain);
         printf("\t\tReturn of Investment: %.2f%% \n\n", percentage_return);
         printf("\t\tAnnualised ROI: %.2f%% \n", annualROI);
 
-        //5 - Options
         do
         {
             printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
@@ -434,8 +435,10 @@ void ROI(void)
                 printf("\nInvalid option, please try again.");
         }
         while(cont_exit != 0 && cont_exit != 1);
+
     }
     while(cont_exit == 0);
+
 }
 
 void EPF(void)
@@ -499,12 +502,15 @@ void EPF(void)
                 printf("\nInvalid option, please try again.");
         }
         while(cont_exit != 0 && cont_exit != 1);
+
     }
     while(cont_exit == 0);
+
 }
 
 void help(void){
     system("cls");
+    
     printf("\n\n\t\t\t\t\t***Help & About***\n\n");
     printf("\t\tVersion: %s (%s)\n\n", FULLVERSION_STRING, STATUS);
 
