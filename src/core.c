@@ -314,10 +314,8 @@ double dchecker(double max, double min, int allowzero, int psfix)
  * The following function takes in an integer value
  * and returns a global string (_cmonth)
  *
- * This function is to be used in conjunction with
- * dchecker as this code lacks any sort of error
- * checking functionality, thus is all delegated to
- * dchecker.
+ * This code lacks any sort of error checking functionality, 
+ * thus data should be sanitised before using this function.
  **/
 
 void month_function(int nmonth)
