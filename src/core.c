@@ -47,7 +47,7 @@ int flush()
 
 long ichecker(long max, long min, int allowzero, int psfix)
 {
-    char input[20];
+    char input[40];
     int error = 1, haschar, hasdecimal;
     long value;
     while(error == 1)
@@ -73,40 +73,38 @@ long ichecker(long max, long min, int allowzero, int psfix)
         }
 
 
-        scanf("%20s",input);
+        scanf("%40s",input);
         flush();
 
-        char tempstr[20];
         int length;
-        strncpy(tempstr,input,20);
-        if(strlen(tempstr) <= 20)
+        if(strlen(input) <= 40)
         {
-            length = strlen(tempstr);
+            length = strlen(input);
         }
         else
         {
-            length = 20;
+            length = 40;
         }
 
         for(int i = 0; i < length; i++)
         {
-            if(isdigit(tempstr[i]) == 0)
+            if(isdigit(input[i]) == 0)
             {
-                if(i != 0 && tempstr[i] == '.' && hasdecimal == 0)
+                if(i != 0 && input[i] == '.' && hasdecimal == 0)
                 {
                     hasdecimal = 1;
                     continue;
                 }
-                else if(i == 0 && (tempstr[i] == '+' || tempstr[i] == '-'))
+                else if(i == 0 && (input[i] == '+' || input[i] == '-'))
                     continue;
                 haschar = 1;
                 break;
             }
         }
 
-        if(haschar == 0)
+        if(haschar == 0 && length < 40)
         {
-            value = strtol(tempstr,NULL,10);
+            value = strtol(input,NULL,10);
 
             if(value == 0 && allowzero == 0)
             {
@@ -125,6 +123,10 @@ long ichecker(long max, long min, int allowzero, int psfix)
                 error = 0;
             }
         }
+        else if(length == 40)
+        {
+            printf("\nInput exceeds buffer length, please try again.\n\n");
+        }
         else
         {
             printf("\nCharacter detected, try inputting only numerical values.\n\n");
@@ -136,7 +138,7 @@ long ichecker(long max, long min, int allowzero, int psfix)
 
 float fchecker(float max, float min, int allowzero, int psfix)
 {
-    char input[20];
+    char input[40];
     int error = 1, haschar, hasdecimal;
     float value;
     while(error == 1)
@@ -161,40 +163,38 @@ float fchecker(float max, float min, int allowzero, int psfix)
             printf("%s (%.1f - %.1f %s): ",*_string, min, max, *_units);
         }
 
-        scanf("%20s",input);
+        scanf("%40s",input);
         flush();
 
-        char tempstr[20];
         int length;
-        strncpy(tempstr,input,20);
-        if(strlen(tempstr) <= 20)
+        if(strlen(input) <= 40)
         {
-            length = strlen(tempstr);
+            length = strlen(input);
         }
         else
         {
-            length = 20;
+            length = 40;
         }
 
         for(int i = 0; i < length; i++)
         {
-            if(isdigit(tempstr[i]) == 0)
+            if(isdigit(input[i]) == 0)
             {
-                if(i != 0 && tempstr[i] == '.' && hasdecimal == 0)
+                if(i != 0 && input[i] == '.' && hasdecimal == 0)
                 {
                     hasdecimal = 1;
                     continue;
                 }
-                else if(i == 0 && (tempstr[i] == '+' || tempstr[i] == '-'))
+                else if(i == 0 && (input[i] == '+' || input[i] == '-'))
                     continue;
                 haschar = 1;
                 break;
             }
         }
 
-        if(haschar == 0)
+        if(haschar == 0 && length < 40)
         {
-            value = strtof(tempstr,NULL);
+            value = strtof(input,NULL);
 
             if(value == 0 && allowzero == 0)
             {
@@ -217,6 +217,10 @@ float fchecker(float max, float min, int allowzero, int psfix)
                 error = 0;
             }
         }
+        else if(length == 40)
+        {
+            printf("\nInput exceeds buffer length, please try again.\n\n");
+        }
         else
         {
             printf("\nCharacter detected, try inputting only numerical values.\n\n");
@@ -228,7 +232,7 @@ float fchecker(float max, float min, int allowzero, int psfix)
 
 double dchecker(double max, double min, int allowzero, int psfix)
 {
-    char input[20];
+    char input[40];
     int error = 1, haschar, hasdecimal;
     double value;
     while(error == 1)
@@ -253,40 +257,38 @@ double dchecker(double max, double min, int allowzero, int psfix)
             printf("%s (%.1lf - %.1lf%s): ",*_string, min, max, *_units);
         }
 
-        scanf("%20s",input);
+        scanf("%40s",input);
         flush();
 
-        char tempstr[20];
         int length;
-        strncpy(tempstr,input,20);
-        if(strlen(tempstr) <= 20)
+        if(strlen(input) <= 40)
         {
-            length = strlen(tempstr);
+            length = strlen(input);
         }
         else
         {
-            length = 20;
+            length = 40;
         }
 
         for(int i = 0; i < length; i++)
         {
-            if(isdigit(tempstr[i]) == 0)
+            if(isdigit(input[i]) == 0)
             {
-                if(i != 0 && tempstr[i] == '.' && hasdecimal == 0)
+                if(i != 0 && input[i] == '.' && hasdecimal == 0)
                 {
                     hasdecimal = 1;
                     continue;
                 }
-                else if(i == 0 && (tempstr[i] == '+' || tempstr[i] == '-'))
+                else if(i == 0 && (input[i] == '+' || input[i] == '-'))
                     continue;
                 haschar = 1;
                 break;
             }
         }
 
-        if(haschar == 0)
+        if(haschar == 0 && length < 40)
         {
-            value = strtod(tempstr, NULL);
+            value = strtod(input, NULL);
 
             if(value == 0 && allowzero == 0)
             {
@@ -308,6 +310,10 @@ double dchecker(double max, double min, int allowzero, int psfix)
             {
                 error = 0;
             }
+        }
+        else if(length == 40)
+        {
+            printf("\nInput exceeds buffer length, please try again.\n\n");
         }
         else
         {
