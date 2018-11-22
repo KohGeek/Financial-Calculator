@@ -47,13 +47,14 @@ int flush()
 
 long ichecker(long max, long min, int allowzero, int psfix)
 {
+    char* pChar;
     char input[40];
-    int error = 1, haschar, hasdecimal;
+    int error = 1, haschar, hasdecimal, isempty, isoverflow, hasspace, length;
     long value;
     while(error == 1)
     {
         errno = 0;
-        hasdecimal = haschar = 0;
+        hasdecimal = haschar = isempty = isoverflow = hasspace = 0;
 
         if(psfix == 0)
         {
@@ -72,21 +73,24 @@ long ichecker(long max, long min, int allowzero, int psfix)
             printf("%s (%ld - %ld %s): ",*_string, min, max, *_units);
         }
 
+        fgets(input,40,stdin);
+        pChar = strchr(input,'\n');
 
-        scanf("%40s",input);
-        flush();
-
-        int length;
-        if(strlen(input) <= 40)
+        if(pChar)
         {
-            length = strlen(input);
+            length = strlen(input) - 1;
+            if(input[0] == '\n')
+                isempty = 1;
         }
+        else if(fgetc(stdin) == '\n')
+            length = strlen(input);
         else
         {
-            length = 40;
+            isoverflow = 1;
+            flush();
         }
 
-        for(int i = 0; i < length; i++)
+        for(int i = 0; i < length && isoverflow != 1 && isempty != 1; i++)
         {
             if(isdigit(input[i]) == 0)
             {
@@ -97,12 +101,19 @@ long ichecker(long max, long min, int allowzero, int psfix)
                 }
                 else if(i == 0 && (input[i] == '+' || input[i] == '-'))
                     continue;
+                else if(input[i] == ' ' || input[i] == '\t')
+                    hasspace = 1;
                 haschar = 1;
-                break;
             }
         }
 
-        if(haschar == 0 && length < 40)
+        if(isempty == 1)
+            printf("\nDetected input is empty, did you key in anything?\n\n");
+        else if(hasspace == 1)
+            printf("\nSpace character detected, please try again.\n\n");
+        else if(isoverflow == 1)
+            printf("\nInput exceeds buffer length, please try again.\n\n");
+        else if(haschar == 0)
         {
             value = strtol(input,NULL,10);
 
@@ -123,10 +134,6 @@ long ichecker(long max, long min, int allowzero, int psfix)
                 error = 0;
             }
         }
-        else if(length == 40)
-        {
-            printf("\nInput exceeds buffer length, please try again.\n\n");
-        }
         else
         {
             printf("\nCharacter detected, try inputting only numerical values.\n\n");
@@ -138,13 +145,14 @@ long ichecker(long max, long min, int allowzero, int psfix)
 
 float fchecker(float max, float min, int allowzero, int psfix)
 {
+    char* pChar;
     char input[40];
-    int error = 1, haschar, hasdecimal;
+    int error = 1, haschar, hasdecimal, isempty, isoverflow, hasspace, length;
     float value;
     while(error == 1)
     {
         errno = 0;
-        hasdecimal = haschar = 0;
+        hasdecimal = haschar = isempty = isoverflow = hasspace = 0;
 
         if(psfix == 0)
         {
@@ -163,20 +171,24 @@ float fchecker(float max, float min, int allowzero, int psfix)
             printf("%s (%.1f - %.1f %s): ",*_string, min, max, *_units);
         }
 
-        scanf("%40s",input);
-        flush();
+        fgets(input,40,stdin);
+        pChar = strchr(input,'\n');
 
-        int length;
-        if(strlen(input) <= 40)
+        if(pChar)
         {
-            length = strlen(input);
+            length = strlen(input) - 1;
+            if(input[0] == '\n')
+                isempty = 1;
         }
+        else if(fgetc(stdin) == '\n')
+            length = strlen(input);
         else
         {
-            length = 40;
+            isoverflow = 1;
+            flush();
         }
 
-        for(int i = 0; i < length; i++)
+        for(int i = 0; i < length && isoverflow != 1 && isempty != 1; i++)
         {
             if(isdigit(input[i]) == 0)
             {
@@ -187,14 +199,21 @@ float fchecker(float max, float min, int allowzero, int psfix)
                 }
                 else if(i == 0 && (input[i] == '+' || input[i] == '-'))
                     continue;
+                else if(input[i] == ' ' || input[i] == '\t')
+                    hasspace = 1;
                 haschar = 1;
-                break;
             }
         }
 
-        if(haschar == 0 && length < 40)
+        if(isempty == 1)
+            printf("\nDetected input is empty, did you key in anything?\n\n");
+        else if(hasspace == 1)
+            printf("\nSpace character detected, please try again.\n\n");
+        else if(isoverflow == 1)
+            printf("\nInput exceeds buffer length, please try again.\n\n");
+        else if(haschar == 0)
         {
-            value = strtof(input,NULL);
+            value = strtod(input, NULL);
 
             if(value == 0 && allowzero == 0)
             {
@@ -217,10 +236,6 @@ float fchecker(float max, float min, int allowzero, int psfix)
                 error = 0;
             }
         }
-        else if(length == 40)
-        {
-            printf("\nInput exceeds buffer length, please try again.\n\n");
-        }
         else
         {
             printf("\nCharacter detected, try inputting only numerical values.\n\n");
@@ -232,13 +247,14 @@ float fchecker(float max, float min, int allowzero, int psfix)
 
 double dchecker(double max, double min, int allowzero, int psfix)
 {
+    char* pChar;
     char input[40];
-    int error = 1, haschar, hasdecimal;
+    int error = 1, haschar, hasdecimal, isempty, isoverflow, hasspace, length;
     double value;
     while(error == 1)
     {
         errno = 0;
-        hasdecimal = haschar = 0;
+        hasdecimal = haschar = isempty = isoverflow = hasspace = 0;
 
         if(psfix == 0)
         {
@@ -254,23 +270,27 @@ double dchecker(double max, double min, int allowzero, int psfix)
         }
         else
         {
-            printf("%s (%.1lf - %.1lf%s): ",*_string, min, max, *_units);
+            printf("%s (%.1lf - %.1lf %s): ",*_string, min, max, *_units);
         }
 
-        scanf("%40s",input);
-        flush();
+        fgets(input,40,stdin);
+        pChar = strchr(input,'\n');
 
-        int length;
-        if(strlen(input) <= 40)
+        if(pChar)
         {
-            length = strlen(input);
+            length = strlen(input) - 1;
+            if(input[0] == '\n')
+                isempty = 1;
         }
+        else if(fgetc(stdin) == '\n')
+            length = strlen(input);
         else
         {
-            length = 40;
+            isoverflow = 1;
+            flush();
         }
 
-        for(int i = 0; i < length; i++)
+        for(int i = 0; i < length && isoverflow != 1 && isempty != 1; i++)
         {
             if(isdigit(input[i]) == 0)
             {
@@ -281,12 +301,19 @@ double dchecker(double max, double min, int allowzero, int psfix)
                 }
                 else if(i == 0 && (input[i] == '+' || input[i] == '-'))
                     continue;
+                else if(input[i] == ' ' || input[i] == '\t')
+                    hasspace = 1;
                 haschar = 1;
-                break;
             }
         }
 
-        if(haschar == 0 && length < 40)
+        if(isempty == 1)
+            printf("\nDetected input is empty, did you key in anything?\n\n");
+        else if(hasspace == 1)
+            printf("\nSpace character detected, please try again.\n\n");
+        else if(isoverflow == 1)
+            printf("\nInput exceeds buffer length, please try again.\n\n");
+        else if(haschar == 0)
         {
             value = strtod(input, NULL);
 
@@ -310,10 +337,6 @@ double dchecker(double max, double min, int allowzero, int psfix)
             {
                 error = 0;
             }
-        }
-        else if(length == 40)
-        {
-            printf("\nInput exceeds buffer length, please try again.\n\n");
         }
         else
         {
