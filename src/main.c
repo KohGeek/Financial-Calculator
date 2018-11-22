@@ -451,7 +451,7 @@ void ROI(void)
 void EPF(void)
 {
     int c_age, r_age, life_expect, retire_yr_on, spending_yr_period, cont_exit = 0 , avg_incre , contri_rate , acc , avg_dvd ;
-    float total_saving = 0, inflation, month_income;
+    float total_saving = 0, inflation, month_income total_saving_acc1 , total_saving_acc2;
     system("cls");
 
     do
@@ -485,6 +485,11 @@ void EPF(void)
         scanf("%f" , &avg_dvd);
         printf("\t\tMoney in Acc :\n");
         scanf("%f" , &acc);
+        //Solution for epf saving calculator
+        total_saving_acc1 = month_income + (month_income * contri_rate / 100 )+(month_income * avg_dvd /100) ; // 1st yr
+        //2nd year onward
+        total_saving_acc2 =  total_saving_acc1 +(total_saving_acc1 * avg_incre/100)+ (total_saving_acc1 * contri_rate / 100 )+(total_saving_acc1 * avg_dvd /100) ;
+
 
 
 
