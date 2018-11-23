@@ -6,8 +6,8 @@ This project is a collab work between 6 group members, as requested by the [Assi
 
 - [x] Establish a scope
 - [x] Decide and establish the software for documentation work
+- [x] Code, polish and finalise
 - [ ] Document all major changes
-- [ ] Code, polish and finalise
 
 ## Scope
 
@@ -15,7 +15,7 @@ This project is a collab work between 6 group members, as requested by the [Assi
   - [x] Mortage
   - [x] Car
 - [x] Bank Account Interest/Fixed Deposit
-- [ ] KWSP Calculator
+- [x] KWSP Calculator
 - [x] Return of Investment Calculator
 
 ## Documentation
