@@ -21,7 +21,7 @@ void help(void);
 
 int main(void)
 {
-    int opt = 10;
+    char opt = 'a';
 
     do
     {
@@ -29,32 +29,32 @@ int main(void)
 
         printf("Enter an option to continue: ");
 
-        scanf("%d", &opt); //every input is done this way to prevent input errors
+        scanf("%c", &opt); //every input is done this way to prevent input errors
         if (flush() == 1)
         {
-            opt = 10;
+            opt = 'a';
         }
 
         switch(opt)
         {
-        case 0:
+        case '0':
             break;
-        case 1:
+        case '1':
             housing_loan();
             break;
-        case 2:
+        case '2':
             car_loan();
             break;
-        case 3:
+        case '3':
             bank_interest();
             break;
-        case 4:
+        case '4':
             ROI();
             break;
-        case 5:
+        case '5':
             EPF();
             break;
-        case 9:
+        case '9':
             help();
             break;
         default:
@@ -62,7 +62,7 @@ int main(void)
             printf("\nInvalid input, please try again.");
         }
     }
-    while (opt != 0);
+    while (opt != '0');
 
     return 0;
 }
@@ -81,9 +81,10 @@ void main_menu(void)
 
 void housing_loan(void)
 {
-    int tenure, month, year, cont_exit = 2;
+    int tenure, month, year;
     double cost, loan_amt, pow_func;
     float loan_prcnt, intrst_rate, installment, monthly_intrst;
+    char cont_exit = '2';
     system("cls");
 
     do
@@ -119,31 +120,31 @@ void housing_loan(void)
         {
             printf("\nChoose any one option to continue? (0 - Calculate again; 1 - Display full repayment schedule;\n 2 - Exit to main menu; 3 - Exit program) : ");
 
-            scanf("%d", &cont_exit);
+            scanf("%c", &cont_exit);
             if (flush() == 1)
             {
-                cont_exit = 3;
+                cont_exit = '3';
             }
 
-            if(cont_exit == 3)
+            if(cont_exit == '3')
             {
                 exit(0);
             }
-            else if(cont_exit == 2)
+            else if(cont_exit == '2')
             {
                 system("cls");
                 return;
             }
-            else if(cont_exit != 1 && cont_exit != 0)
+            else if(cont_exit != '1' && cont_exit != '0')
             {
                 printf("\nInvalid option, please try again.\n");
             }
         }
-        while(cont_exit != 1 && cont_exit != 0);
+        while(cont_exit != '1' && cont_exit != '0');
 
         system("cls");
 
-        if (cont_exit == 1) //This part pertains to the full amortization schedule
+        if (cont_exit == '1') //This part pertains to the full amortization schedule
         {
             printf("\n\n\t\t\t\t\t***Housing Loan Calculator***\n\n\n");
 
@@ -188,39 +189,41 @@ void housing_loan(void)
             {
                 printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
 
-                scanf("%d", &cont_exit);
+                scanf("%c", &cont_exit);
                 if (flush() == 1)
                 {
-                    cont_exit = 3;
+                    cont_exit = '3';
                 }
 
-                if (cont_exit == 1)
+                if (cont_exit == '1')
                     system("cls");
-                else if (cont_exit == 0)
+                else if (cont_exit == '0')
                     system("cls");
-                else if (cont_exit == 2)
+                else if (cont_exit == '2')
                     exit(0);
                 else
                     printf("\nInvalid option, please try again.");
             }
-            while(cont_exit != 0 && cont_exit != 1);
+            while(cont_exit != '0' && cont_exit != '1');
         }
 
     }
-    while(cont_exit == 0);
+    while(cont_exit == '0');
 
 }
 
 void car_loan(void)
 {
-    int loan_period, count, year, month, cont_exit = 0;
-    double price, downpay, interest, intrst_sum = 0;
+    int loan_period, count, year, month;
+    double price, downpay, interest, intrst_sum;
     float rate, payment;
+    char cont_exit = '0';;
     system("cls");
 
     do
     {
-        count = 0;
+        intrst_sum = 0, count = 0;
+
         printf("\n\n\t\t\t\t\t***Car Loan Calculator***\n\n\n");
 
         *_string = "\t\tCar Price\0";
@@ -278,37 +281,39 @@ void car_loan(void)
         {
             printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
 
-            scanf("%d", &cont_exit);
+            scanf("%c", &cont_exit);
             if (flush() == 1)
             {
-                cont_exit = 3;
+                cont_exit = '3';
             }
 
-            if (cont_exit == 1)
+            if (cont_exit == '1')
                 system("cls");
-            else if (cont_exit == 0)
+            else if (cont_exit == '0')
                 system("cls");
-            else if (cont_exit == 2)
+            else if (cont_exit == '2')
                 exit(0);
             else
                 printf("\nInvalid option, please try again.");
         }
-        while(cont_exit != 0 && cont_exit != 1);
+        while(cont_exit != '0' && cont_exit != '1');
 
     }
-    while (cont_exit == 0);
+    while (cont_exit == '0');
 
 }
 
 void bank_interest(void)
 {
-    int years, cont_exit = 0;
+    int years;
     double initial_amount, final_amount, rate, freq;
-    char type = 'I';
+    char cont_exit = '0';
     system("cls");
 
     do
     {
+        char type = 'I';
+
         printf("\n\n\t\t\t\t\t***Fixed Deposit Interest Calculator***\n\n\n");
 
         *_string = "\t\tInitial amount\0";
@@ -370,32 +375,32 @@ void bank_interest(void)
         {
             printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
 
-            scanf("%d", &cont_exit);
+            scanf("%c", &cont_exit);
             if (flush() == 1)
             {
-                cont_exit = 3;
+                cont_exit = '3';
             }
 
-            if (cont_exit == 1)
+            if (cont_exit == '1')
                 system("cls");
-            else if (cont_exit == 0)
+            else if (cont_exit == '0')
                 system("cls");
-            else if (cont_exit == 2)
+            else if (cont_exit == '2')
                 exit(0);
             else
                 printf("\nInvalid option, please try again.");
         }
-        while(cont_exit != 0 && cont_exit != 1);
+        while(cont_exit != '0' && cont_exit != '1');
 
     }
-    while(cont_exit == 0);
+    while(cont_exit == '0');
 
 }
 
 void ROI(void)
 {
     float amt_invested, amt_returned, investment_time, investment_gain, percentage_return, annualROI;
-    int cont_exit = 0;
+    char cont_exit = '0';
     system("cls");
 
     do
@@ -426,37 +431,42 @@ void ROI(void)
         {
             printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
 
-            scanf("%d", &cont_exit);
+            scanf("%c", &cont_exit);
             if (flush() == 1)
             {
-                cont_exit = 3;
+                cont_exit = '3';
             }
 
-            if (cont_exit == 1)
+            if (cont_exit == '1')
                 system("cls");
-            else if (cont_exit == 0)
+            else if (cont_exit == '0')
                 system("cls");
-            else if (cont_exit == 2)
+            else if (cont_exit == '2')
                 exit(0);
             else
                 printf("\nInvalid option, please try again.");
         }
-        while(cont_exit != 0 && cont_exit != 1);
+        while(cont_exit != '0' && cont_exit != '1');
 
     }
-    while(cont_exit == 0);
+    while(cont_exit == '0');
 
 }
 
 void EPF(void)
 {
-    int c_age, r_age, life_expect, retire_yr_on, spending_yr_period, cont_exit = 0 , avg_incre , contri_rate , acc , avg_dvd ;
-    float total_saving = 0, inflation, month_income total_saving_acc1 , total_saving_acc2;
+    int c_age, r_age, life_expect, retire_yr_on, spending_yr_period;
+    float total_saving, inflation, month_income, avg_incre, contri_rate, acc, avg_dvd, month_payout;
+    char cont_exit = '0';
     system("cls");
 
     do
     {
-        printf("\n\n\t\t\t\t\t***Retirement Savings Calculator***\n\n\n");
+        total_saving = 0;
+
+        printf("\n\n\t\t\t\t   ***EPF Retirement Calculator***\n\n\n");
+
+        printf("\t\t\t\t\tRetirement Savings\n\n");
 
         *_string = "\t\tCurrent age\0";
         *_units = "years old\0";
@@ -465,7 +475,7 @@ void EPF(void)
         *_string = "\t\tRetirement age\0";
         r_age = ichecker(70,c_age,0,3);
 
-        *_string = "\t\tLife expectancy";
+        *_string = "\t\tLife expectancy\0";
         life_expect = ichecker(130,r_age,0,3);
 
         *_string = "\t\tExpected inflation rate\0";
@@ -474,62 +484,79 @@ void EPF(void)
 
         *_string = "\t\tMonthly payout\0";
         *_units = "RM\0";
+        month_payout = fchecker(1000000,1,0,1);
+
+
+        printf("\n\t\t\t\t\tEPF Calculations\n");
+
+        *_string = "\n\t\tMoney in Account\0";
+        *_units = "RM\0";
+        acc = fchecker(1000000000,0,1,1);
+
+        *_string = "\t\tCurrent Monthly Income\0";
         month_income = fchecker(1000000,0,1,1);
 
-        //EPF saving calculator
-        printf("\t\tAverage Salary Increment :\n");
-        scanf("%f" , &avg_incre);
-        printf("\t\tContribution Rate :\n");
-        scanf("%f" , &contri_rate);
-        printf("\t\tAverage Dividend ;\n")
-        scanf("%f" , &avg_dvd);
-        printf("\t\tMoney in Acc :\n");
-        scanf("%f" , &acc);
-        //Solution for epf saving calculator
-        total_saving_acc1 = month_income + (month_income * contri_rate / 100 )+(month_income * avg_dvd /100) ; // 1st yr
-        //2nd year onward
-        total_saving_acc2 =  total_saving_acc1 +(total_saving_acc1 * avg_incre/100)+ (total_saving_acc1 * contri_rate / 100 )+(total_saving_acc1 * avg_dvd /100) ;
+        *_string = "\t\tAverage Salary Increment\0";
+        *_units = "%\0";
+        avg_incre = fchecker(10,0,1,2);
 
+        *_string = "\t\tEmployee Contribution Rate\0";
+        contri_rate = fchecker(25,0,1,2);
 
+        *_string = "\t\tDividend Percentage\0";
+        avg_dvd = fchecker(25,0,1,2);
+
+        for(int i = c_age; i <= r_age; i++){
+            acc *= (1 + (avg_dvd / 100));
+            acc += (month_income * contri_rate / 100) * 12;
+            month_income *= (1 + (avg_incre / 100));
+        }
 
 
         retire_yr_on = r_age - c_age;
         spending_yr_period = life_expect - r_age;
-        month_income *= pow(1 + inflation / 100, r_age - c_age - 1); //monthly income adjusted to inflation
+        month_payout *= pow(1 + inflation / 100, r_age - c_age - 1); //monthly income adjusted to inflation
 
         for(; r_age <= life_expect; r_age++)
         {
-            month_income *= (1 + inflation / 100);
-            total_saving += ceil(month_income) * 12;
+            month_payout *= (1 + inflation / 100);
+            total_saving += ceil(month_payout) * 12;
         }
 
         printf("\n\t\tRetire in : %d years\n\n", retire_yr_on);
         printf("\t\tSpending year period : %d years\n\n", spending_yr_period);
         printf("\t\tTotal saving required by retirement : RM%.2f\n", total_saving);
+        printf("\n\t\tTotal saving accumulated by EPF : RM%.2f\n", acc);
+
+        if(total_saving < acc){
+            printf("\n\n\t\tSavings is sufficient.\n");
+        }else{
+            printf("\n\n\t\tSavings is insufficient, lacks RM%.2f.\n",total_saving - acc);
+        }
 
         do
         {
             printf("\n\nChoose any one option to continue? (0 - Calculate again; 1 - Return to main menu;\n 2 - Exit the program) : ");
 
-            scanf("%d", &cont_exit);
+            scanf("%c", &cont_exit);
             if (flush() == 1)
             {
-                cont_exit = 3;
+                cont_exit = '3';
             }
 
-            if (cont_exit == 1)
+            if (cont_exit == '1')
                 system("cls");
-            else if (cont_exit == 0)
+            else if (cont_exit == '0')
                 system("cls");
-            else if (cont_exit == 2)
+            else if (cont_exit == '2')
                 exit(0);
             else
                 printf("\nInvalid option, please try again.");
         }
-        while(cont_exit != 0 && cont_exit != 1);
+        while(cont_exit != '0' && cont_exit != '1');
 
     }
-    while(cont_exit == 0);
+    while(cont_exit == '0');
 
 }
 
