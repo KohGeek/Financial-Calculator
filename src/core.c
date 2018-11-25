@@ -10,7 +10,7 @@
  *
  * flush() is used to clear input buffer in a safe and clean manner
  * by looping through the input buffer. Additional value can be returned
- * to help validate
+ * to help validate input.
  *
 **/
 
@@ -121,10 +121,6 @@ long ichecker(long max, long min, int allowzero, int psfix)
             {
                 printf("\nValue detected is 0 and invalid. Please try again.\n\n");
             }
-            else if(value == 0)
-            {
-                error = 0;
-            }
             else if(errno == ERANGE || value < min || value > max)
             {
                 printf("\nValue keyed in is out of range, should be between %ld and %ld, please try again.\n\n", min, max);
@@ -213,21 +209,13 @@ float fchecker(float max, float min, int allowzero, int psfix)
             printf("\nInput exceeds buffer length, please try again.\n\n");
         else if(haschar == 0)
         {
-            value = strtod(input, NULL);
+            value = strtof(input, NULL);
 
             if(value == 0 && allowzero == 0)
             {
                 printf("\nValue detected is 0 and invalid. Please try again.\n\n");
             }
-            else if(value == NAN || value == INFINITY)
-            {
-                printf("\nValue is invalid, please try again.\n\n");
-            }
-            else if(value == 0)
-            {
-                error = 0;
-            }
-            else if(errno == ERANGE || value < min || value > max)
+            else if(errno == ERANGE || value < min || value > max || value == NAN || value == INFINITY)
             {
                 printf("\nValue keyed in is out of range, should be between %.1f and %.1f, please try again.\n\n", min, max);
             }
@@ -321,15 +309,7 @@ double dchecker(double max, double min, int allowzero, int psfix)
             {
                 printf("\nValue detected is 0 and invalid. Please try again.\n\n");
             }
-            else if(value == NAN || value == INFINITY)
-            {
-                printf("\nValue is invalid, please try again.\n\n");
-            }
-            else if(value == 0)
-            {
-                error = 0;
-            }
-            else if(errno == ERANGE || value < min || value > max)
+            else if(errno == ERANGE || value < min || value > max || value == NAN || value == INFINITY)
             {
                 printf("\nValue keyed in is out of range, should be between %.1lf and %.1lf, please try again.\n\n", min, max);
             }
