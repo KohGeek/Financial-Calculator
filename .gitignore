@@ -2,6 +2,7 @@
 bin/
 obj/
 .vs/
+.vscode/
 
 # Visual Studio files
 *.db
@@ -69,3 +70,7 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Miscellaneous
+*.tmp
+~$*

@@ -1,3 +1,21 @@
+/**
+ * This code will not compile under C89 standard due to mixed code 
+ * and declaration under certain functions. 
+ * 
+ * VS 2010 in particular will not compile.
+ * 
+ * The recommended compiler for this code is the GNU GCC compiler,
+ * as it is consistently used throughout the development of this
+ * project.
+ * 
+ * Dirty link: https://www.gnu.org/software/gcc/
+ * 
+ * The Git repo for this project can be found here:
+ * https://github.com/KohGeek/Financial-Calculator
+ * 
+ * The repo will be publicly released by 1st of December, 2018.
+ **/
+
 #include <stdio.h>
 #include <math.h>
 #include <windows.h>
@@ -123,7 +141,7 @@ void housing_loan(void)
             scanf("%c", &cont_exit);
             if (flush() == 1)
             {
-                cont_exit = '3';
+                cont_exit = '4';
             }
 
             if(cont_exit == '3')
@@ -178,7 +196,7 @@ void housing_loan(void)
                     year++;
                     month = 1;
                 }
-                else if (balance <= 0)
+                if (balance <= 0)
                     balance = 0;
                 month_function(month);
                 printf("%3d\t%s %d\t%.2f\t\t%7.2f\t\t%9.2lf\t%7.2f\t\t%9.2lf\n", no, *_cmonth, year, installment, intrst_accrued, intrst_sum, princpl, balance);

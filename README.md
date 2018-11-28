@@ -7,7 +7,7 @@ This project is a collab work between 6 group members, as requested by the [Assi
 - [x] Establish a scope
 - [x] Decide and establish the software for documentation work
 - [x] Code, polish and finalise
-- [ ] Document all major changes
+- [x] Document all major changes
 
 ## Scope
 
@@ -21,6 +21,8 @@ This project is a collab work between 6 group members, as requested by the [Assi
 ## Documentation
 
 Microsoft Word is to be used.
+
+Check [Documentation.md](doc/Documentation.md) for more information.
 
 ## References
 

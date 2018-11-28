@@ -1,3 +1,8 @@
+/** 
+ * This part of the code was intended only for autoversioing and
+ * logging purpose, a function provided as-is by Code:Blocks.
+**/
+
 #ifndef VERSION_H
 #define VERSION_H
 

@@ -1,3 +1,8 @@
+/**
+ * This file stores all the non-calculator function of the code,
+ * validator, input-flushing and number-to-month converter.
+**/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
@@ -53,8 +58,7 @@ long ichecker(long max, long min, int allowzero, int psfix)
     long value;
     while(error == 1)
     {
-        errno = 0;
-        hasdecimal = haschar = isempty = isoverflow = hasspace = 0;
+        errno = hasdecimal = haschar = isempty = isoverflow = hasspace = 0;
 
         if(psfix == 0)
         {
@@ -147,8 +151,7 @@ float fchecker(float max, float min, int allowzero, int psfix)
     float value;
     while(error == 1)
     {
-        errno = 0;
-        hasdecimal = haschar = isempty = isoverflow = hasspace = 0;
+        errno = hasdecimal = haschar = isempty = isoverflow = hasspace = 0;
 
         if(psfix == 0)
         {
@@ -241,8 +244,7 @@ double dchecker(double max, double min, int allowzero, int psfix)
     double value;
     while(error == 1)
     {
-        errno = 0;
-        hasdecimal = haschar = isempty = isoverflow = hasspace = 0;
+        errno = hasdecimal = haschar = isempty = isoverflow = hasspace = 0;
 
         if(psfix == 0)
         {
