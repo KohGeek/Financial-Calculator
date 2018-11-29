@@ -233,7 +233,7 @@ void car_loan(void)
     int loan_period, count, year, month;
     double price, downpay, interest, intrst_sum;
     float rate, payment;
-    char cont_exit = '0';;
+    char cont_exit = '0';
     system("cls");
 
     do
