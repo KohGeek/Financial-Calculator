@@ -55,8 +55,6 @@ int main(void)
 
         switch(opt)
         {
-        case '0':
-            break;
         case '1':
             housing_loan();
             break;
