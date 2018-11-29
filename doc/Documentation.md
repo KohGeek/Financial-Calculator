@@ -13,13 +13,13 @@
 
 ## Flowchart
 
-- [ ] Main Menu
+- [x] Main Menu
 - [x] Housing Loan
 - [ ] Car Loan
 - [ ] EPF Retirement
 - [x] Fixed Deposit
 - [x] Return of Investment
-- [ ] Help & About
+- [x] Help & About
 - [x] Core.h
 
 ## Pseudocode
