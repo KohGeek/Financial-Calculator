@@ -7,7 +7,7 @@
 - [ ] Car Loan
 - [ ] EPF Retirement
 - [ ] Fixed Deposit
-- [ ] Return of Investment
+- [x] Return of Investment
 - [ ] Core.h
 
 ## Flowchart
@@ -33,11 +33,11 @@
 ## Peer Evaluation Form
 
 - [x] Koh Jun Dong
-- [ ] Siew Liang Han
+- [x] Siew Liang Han
 - [x] Ting Qiao Xian
-- [ ] Choy Chun Wei
-- [ ] Low Yeu Herng
-- [ ] Tan Yong Kwong
+- [x] Choy Chun Wei
+- [x] Low Yeu Herng
+- [x] Tan Yong Kwong
 
 ## Screenshots
 
