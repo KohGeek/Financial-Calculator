@@ -16,7 +16,7 @@
 - [x] Main Menu
 - [x] Housing Loan
 - [x] Car Loan
-- [ ] EPF Retirement
+- [x] EPF Retirement
 - [x] Fixed Deposit
 - [x] Return of Investment
 - [x] Help & About
