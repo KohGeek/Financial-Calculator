@@ -44,11 +44,11 @@
 
 ## Screenshots
 
-- [ ] Input Validation
-- [ ] Housing Loan + Amortization Schedule
-- [ ] Car Loan
-- [ ] EPF Retirement
-- [ ] Fixed Deposit
-- [ ] ROI
-- [ ] Main Menu
-- [ ] Help & About
+- [x] Input Validation
+- [x] Housing Loan + Amortization Schedule
+- [x] Car Loan
+- [x] EPF Retirement
+- [x] Fixed Deposit
+- [x] ROI
+- [x] Main Menu
+- [x] Help & About

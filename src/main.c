@@ -1,18 +1,18 @@
 /**
- * This code will not compile under C89 standard due to mixed code 
- * and declaration under certain functions. 
- * 
+ * This code will not compile under C89 standard due to mixed code
+ * and declaration under certain functions.
+ *
  * VS 2010 in particular will not compile.
- * 
+ *
  * The recommended compiler for this code is the GNU GCC compiler,
  * as it is consistently used throughout the development of this
  * project.
- * 
+ *
  * Dirty link: https://www.gnu.org/software/gcc/
- * 
+ *
  * The Git repo for this project can be found here:
  * https://github.com/KohGeek/Financial-Calculator
- * 
+ *
  * The repo will be publicly released by 1st of December, 2018.
  **/
 
@@ -580,7 +580,7 @@ void help(void)
 {
     system("cls");
 
-    printf("\n\n\t\t\t\t\t***Help & About***\n\n");
+    printf("\n\n\t\t\t\t***Help & About***\n\n");
     printf("\t\tVersion: %s (%s)\n\n", FULLVERSION_STRING, STATUS);
 
     printf("\t\tHousing Loan Calculator\n");
